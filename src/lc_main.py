@@ -36,11 +36,14 @@ class lc_main(object):
         # default config_file
         if(self.config_file == None or not os.path.isfile(self.config_file)):
             #give default name
-            self.config_file = get_root_dir()+'lm_control.json'
+            self.config_file = self.GetRootDir()+'lm_control.json'
  
             try:
-                except:
-                logger.error("config file %s not found" % self.config_file)
+                # get configuration
+                self.SetupConfig
+            except:
+                logger.error("error in configuration, exit now")
+                sys.exit()
 
             
 
@@ -48,10 +51,10 @@ class lc_main(object):
         
 
 
-    def get_root_dir(self):
+    def GetRootDir(self):
         """determines the root directory of the lc_main, depending on the OS"""
         #determine the platform, Darwin for OS
-        if platform.system() == 'Darwin'
+        if platform.system() == 'Darwin':
             return '/Users/'+os.getlogin()+'/git/light_control/'
         elif platform.system() == 'Linux': 
             return '/home/'+os.getlogin()+'/git/light_control/'
@@ -66,7 +69,7 @@ class lc_main(object):
 
 if __name__ == "__main__":
     app = QApplication([])
-    config_file = '/Users/klein/git/qt_exercises/config/config_mycal.json'
+    config_file = None
     window = lc_main(config_file = config_file )
     window.show()
     app.exec()           
