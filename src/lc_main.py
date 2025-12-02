@@ -25,35 +25,68 @@ from PySide6.QtWidgets import (QApplication,
 
 
 
-class lc_main(object):
+class lc_main(QMainWindow):
     def __init__(self,config_file = None):
 
 
+        super().__init__()
+
+    #setup pyside6
+        self.setWindowTitle("Light Control")
+        myLabel = QLabel("light control vs 1.0")
+        myCloseButton = QPushButton("Close")
+        myCloseButton.clicked.connect(self.CloseApp)
+        layout= QVBoxLayout()
+        layout.addWidget(myLabel)
+        layout.addWidget(myCloseButton)
 
 
+        widget = QWidget()
+        widget.setLayout(layout)
+
+ 
+
+        self.setCentralWidget(widget)
+        self.show()
+
+
+    # setup system
+
+    # the logger
+        self.SetupLogger()
+
+    # the configuration
         self.config_file = config_file
 
         # default config_file
         if(self.config_file == None or not os.path.isfile(self.config_file)):
             #give default name
-            self.config_file = self.GetRootDir()+'lm_control.json'
+            self.config_file = self.GetRootDir()+'config/lc_control.json'
  
             try:
                 # get configuration
                 self.SetupConfig
             except:
-                logger.error("error in configuration, exit now")
-                sys.exit()
+                logger.warning("error in configuration, opening dialog")
+                self.config_file , filter = QFileDialog.getOpenFileName(self,
+                                self.tr("Open Config file"), "~", self.tr("*.json"))
 
+
+ 
             
 
 
-        
+    def CloseApp(self):
+        logger.info("closing down")
+        self.close()
+     
 
 
     def GetRootDir(self):
         """determines the root directory of the lc_main, depending on the OS"""
         #determine the platform, Darwin for OS
+ 
+ 
         if platform.system() == 'Darwin':
             return '/Users/'+os.getlogin()+'/git/light_control/'
         elif platform.system() == 'Linux': 
@@ -63,6 +96,28 @@ class lc_main(object):
             sys.exit()
             
 
+    def SetupLogger(self):
+
+
+        logger.remove(0)
+        #now we add color to the terminal output
+        logger.add(sys.stdout,
+                colorize = True,format="<green>{time}</green>    {function}   {line}    {level}     <level>{message}</level>" ,
+                level = "DEBUG")
+
+
+
+        fmt =  "{time} - {name}-   {function} -{line}- {level}    - {message}"
+        logger.add('info.log', format = fmt , level = 'INFO',rotation="1 day")
+
+
+        # set the colors of the different levels
+        logger.level("INFO",color ='<black>')
+        logger.level("WARNING",color='<green>')
+        logger.level("ERROR",color='<red>')
+        logger.level("DEBUG",color = '<blue>')
+ 
+        return
 
 
 
