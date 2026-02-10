@@ -10,6 +10,7 @@ from loguru import logger
 import time
 import datetime as dt
 import astral as AT # to get sunrise and sunset
+import control_relay as CR
 from astral.sun import sun
 # globals
 
@@ -21,6 +22,10 @@ class set_light(object):
         # the light will be on friom start_time until start_time+ durration
         # the fomrat of the start_time has to be 16:30:00
         super().__init__()
+
+        #initializ the relay, there are two relays on the board
+        # we initialze them to off
+        self.relay = CR.MyRelay(relay_number = 1,state = 0)
  
         # the self.light_on is a toggle switch
         # tme moment the time condition is fulfilled it will be switched to True
@@ -86,12 +91,14 @@ class set_light(object):
 
         if(current_time > self.start_time.time() and current_time <= self.end_time.time()):
             self.light_on = True
+            self.relay.SetRelayOn()
             print(" we have success")
 
         else: # we only do something if lights are on
             if(self.light_on):
                 self.light_on = False
-                self.turn_off_light()
+                self.relay.SetRelayOff()
+ 
       
 
     def turn_off_light(self):
@@ -100,18 +107,18 @@ class set_light(object):
         return
 
 if __name__ == "__main__":
-    set_my_time = "16:40:00"
+    set_my_time = "15:40:00"
     # info for astral to get sunrise and sunset
     astral_info={'name':'Basel','region':'Switzerland','timezone':'Europe/Paris', \
                  'latitude':47.55224, \
                  'longitude':7.62016 }
 
     # use suunrise or sunset duration 30 minutess
-    SL = set_light(astral_info = astral_info)
+    #SL = set_light(astral_info = astral_info)
     #SL = set_light(astral_info = astral_info, duration = 60)
 
     # use start time, duration is 15 minutes
-    #SL = set_light(start_time = set_my_time)
+    SL = set_light(start_time = set_my_time)
     # use start time, duration is 60 minutes
 
     #SL = set_light(start_time = set_my_time, duration =60)

@@ -1,6 +1,11 @@
 import usbrelay_py
 import subprocess #for cli fucntin
 import argparse
+
+
+# from https://github.com/darrylb123/usbrelay
+#https://www.cyberciti.biz/faq/linux-refresh-reload-group-membership-without-logging-reboot/
+
 class MyRelay(object):
 
     def __init__(self,relay_number = 1,state = None):
@@ -9,7 +14,7 @@ class MyRelay(object):
         #  The relay_number is the number of the relay you wasnt to control
         # But note : its starts counting from 1 and NOT 0
 
-        self.debug = False
+        self.debug = True
 
 
     
@@ -41,7 +46,7 @@ class MyRelay(object):
                     print("at set_relay_off  ",a)
         elif(state == None):
             if(self.debug):
-                    print("at relay = None  ",a)
+                    print("at relay = None  ")
              
             pass
  
@@ -120,7 +125,7 @@ class MyRelay(object):
 
 if __name__ == "__main__":
 
-    MR = MyRelay()
+    MR = MyRelay(state = 0)
     
     #MR.SetRelayOn()
     #MR.GetRelayState()
