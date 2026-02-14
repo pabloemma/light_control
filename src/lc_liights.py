@@ -12,15 +12,18 @@ import datetime as dt
 import astral as AT # to get sunrise and sunset
 import control_relay as CR
 from astral.sun import sun
+import random as RT
 # globals
 
 class set_light(object):
 
-    def __init__(self,start_time = None , duration = 30, astral_info = None):
+    def __init__(self,start_time = None , duration = 30, astral_info = None , random_time = None):
  
         #default is 30 minutes duration
         # the light will be on friom start_time until start_time+ durration
         # the fomrat of the start_time has to be 16:30:00
+        # the random_time, if set should be givenm in minutes
+        # it will randomize the starttime by this amount
         super().__init__()
 
         #initializ the relay, there are two relays on the board
@@ -32,6 +35,15 @@ class set_light(object):
         self.light_on = False
         self.astral_info = astral_info
 
+        if random_time != None :
+            # set the seed
+            RT.seed()
+            random_time_new =  RT.random()*random_time
+            # using 30 , the start time now variess by the most 30 miniutes
+            self.random_time = dt.timedelta(minutes = random_time_new)
+        else:
+            self.random_time = dt.timedelta(minutes = 0)
+
         # if astral_info is not None, we use sunset and sunrise
         # else we use start_time
 
@@ -40,7 +52,7 @@ class set_light(object):
 
             self.duration = dt.timedelta(minutes = duration)
             #this creates a datetime.datetime obj
-            self.start_time = dt.datetime.strptime(start_time, "%H:%M:%S")
+            self.start_time = dt.datetime.strptime(start_time, "%H:%M:%S")+ self.random_time
             self.end_time = self.start_time+self.duration
  
             #self.start_time.time() is then a datetime.time 
@@ -49,7 +61,7 @@ class set_light(object):
         #set up the system for sunrise and sunset
             self.setup_astral()
             self.duration = dt.timedelta(minutes = duration)
-            self.start_time = dt.datetime.strptime(self.my_sunset, "%H:%M:%S")
+            self.start_time = dt.datetime.strptime(self.my_sunset, "%H:%M:%S")+self.raandom_time
             self.end_time = self.start_time+self.duration
 
     
