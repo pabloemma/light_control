@@ -7,3 +7,15 @@
 2026-04-26T14:41:00.808059+0200 - __main__-   CloseApp -102- INFO    - closing down
 2026-04-26T14:46:45.870570+0200 - __main__-   __init__ -88- WARNING    - error in configuration, opening dialog
 2026-04-26T14:47:00.732551+0200 - __main__-   CloseApp -101- INFO    - closing down
+2026-04-26T15:27:26.640092+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
+2026-04-26T15:29:57.358431+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
+2026-04-26T15:31:18.496479+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
+2026-04-26T15:31:59.202452+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
+2026-04-26T15:36:38.386805+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
+2026-04-26T15:37:24.216936+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
+2026-04-26T15:41:15.651776+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
+2026-04-26T15:42:31.262611+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
+2026-04-26T15:42:37.913302+0200 - __main__-   __init__ -99- ERROR    - Error loading configuration file: string indices must be integers
+2026-04-26T15:43:29.202397+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
+2026-04-26T15:44:46.366848+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
+2026-04-26T15:46:50.824089+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog

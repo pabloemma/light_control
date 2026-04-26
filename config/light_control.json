@@ -9,7 +9,15 @@
         "PWfile" : "light.txt",
         "loop_time" : 5
     },
-    "devices" :{
+    "astral_info" : {
+        "latitude" : 47.55224,
+        "longitude" : 7.62016,
+        "name" : "Basel",
+        "region" : "Switzerland",
+        "timezone" : "Europe/Paris"
+    },
+
+   "devices" :{
         "sensor_1" : {
             "ikea_1":{
                 "start_time" : "18:00",

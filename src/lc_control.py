@@ -10,31 +10,25 @@ from loguru import logger
 import time
 import datetime as dt
 import astral as AT # to get sunrise and sunset
-import control_relay as CR
+#import control_relay as CR
 from astral.sun import sun
 import random as RT
+from lc_main import lc_main
 # globals
 
-class set_light(object):
+class set_light(lc_main):
 
-    def __init__(self,start_time = None , duration = 30, astral_info = None , random_time = None):
+    def __init__(self,astral_info):
  
-        #default is 30 minutes duration
-        # the light will be on friom start_time until start_time+ durration
-        # the fomrat of the start_time has to be 16:30:00
-        # the random_time, if set should be givenm in minutes
-        # it will randomize the starttime by this amount
         super().__init__()
 
-        #initializ the relay, there are two relays on the board
-        # we initialze them to off
-        self.relay = CR.MyRelay(relay_number = 1,state = 0)
- 
+  
         # the self.light_on is a toggle switch
         # tme moment the time condition is fulfilled it will be switched to True
         self.light_on = False
         self.astral_info = astral_info
-
+        a = lc_main.myconf 
+        random_time = 30
         if random_time != None :
             # set the seed
             RT.seed()
