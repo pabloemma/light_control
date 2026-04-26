@@ -23,8 +23,8 @@
    "devices" :{
         "sensor_1" : {
             "ikea_1":{
-                "start_time" : "18:00",
-                "end_time" : "23:00",
+                "start_time" : "18:00:00",
+                "end_time" : "23:00:00",
                 "action" : "ON",
                 "window"  : 20
                    
@@ -32,40 +32,40 @@
             },
          "sensor_2" : {
             "ikea_2":{
-                "start_time" : "18:00",
-                "end_time" : "23:00",
+                "start_time" : "18:00:00",
+                "end_time" : "23:00:00",
                 "action" : "ON",    
                 "window"  : 20
                 }
             },
         "sensor_3" : {
             "ikea_3":{
-                "start_time" : "18:00",
-                "end_time" : "23:00",
+                "start_time" : "18:00:00",
+                "end_time" : "23:00:00",
                 "action" : "ON",
                 "window"  : 20
                 }
             },
         "sensor_4" : {
             "ikea_4":{
-                "start_time" : "18:00",
-                "end_time" : "23:00",
+                "start_time" : "18:00:00",
+                "end_time" : "23:00:00",
                 "action" : "ON",
                 "window"  : 20
                 }
             },
         "sensor_5" : {
             "ikea_5":{
-                "start_time" : "18:00",
-                "end_time" : "23:00",
+                "start_time" : "18:00:00",
+                "end_time" : "23:00:00",
                 "action" : "ON",
                 "window"  : 20
                 }
             },
         "sensor_6" : {
             "ikea_6":{
-                "start_time" : "18:00",
-                "end_time" : "23:00",
+                "start_time" : "18:00:00",
+                "end_time" : "23:00:00",
                 "action" : "ON",
                 "window"  : 20
                 }

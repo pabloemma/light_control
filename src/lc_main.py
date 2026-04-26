@@ -6,7 +6,7 @@
 # A switch is used in the system if it has an action eithe ON or OFF.
 #if the action is blank then that switch is not being used.
 # There is a start and end time and a window. If the widonw is 0, it means to use the exact start and end time
-# if the winodw has a value this is used to set a start time and endtime randomly within that window, if the window is astral, it determines the sunset
+# if the winodw has a value this is used to set a start time and endtime randomly within that window, if the window is -1, it determines the sunset
 #for the location and then uses this as the start time and then the end time is determined by the window.
 # So the window can either be for randomness or length of action .
 # The window is used to make the light more random and less predictable.
@@ -30,6 +30,7 @@ import astral as AT
 from astral.sun import sun
 import datetime as dt
 import random as RT
+import time
 
 # my imports
 import lc_config as LC
@@ -113,9 +114,14 @@ class lc_main(QMainWindow):
         #initialize the IKEA class
         self.IKC = IKC.IkeaControl( host = self.myconf.host,username=self.myconf.username)
         #self.IKC.turn_on('ikea_5')
-        self.IKC.turn_off('ikea_5')
+        #self.IKC.turn_off('ikea_5')
+
+        self.device_on = {device: False for device in self.myconf.active_sensors}
 
 
+
+        # here we start
+        self.RunLoop()
 
 
     def CloseApp(self):
@@ -181,14 +187,76 @@ class lc_main(QMainWindow):
         return
     
 
+    def RunLoop(self):
+       # here we coontinually loop over time
+        # loop_time is how often in units of minutes
+        while True:
+            # iterate over all the acive devices
+            #  
+            for device in self.myconf.active_sensors:
+                    # check the time for each device
+                    self.check_device(device)
+
+            #time.sleep(self.myconf.loop_time*60)
+            time.sleep(1)
+            
+
+    def check_device(self,device):
+        # this checks the time for a given device and performs the action if the time is within the window
+        # we get the start time, end time, window and action for the device from the config file
+        start_time = getattr(self.myconf, f"{device}_start")
+        end_time = getattr(self.myconf, f"{device}_end")
+        mywindow = getattr(self.myconf, f"{device}_window")
+        action = getattr(self.myconf, f"{device}_action")
+
+        print(device,start_time)
 
 
+        # if the action is blank, we do not use this device
+        if action == "":
+            return
+
+        # if the window is not 0, we use it to set a random start and end time
+        if mywindow > 0:
+            random_time_new_start = RT.uniform(-mywindow/2, mywindow/2)
+            random_time_new_end = RT.uniform(-mywindow/2, mywindow/2)
+        elif mywindow == -1:
+            random_time_new_start = RT.uniform(-20/2, 20/2)  # with sunset we also ransomize but a smaller window
+            random_time_new_end = RT.uniform(-20/2, 20/2)
+            start_time = self.my_sunset
+        else:
+            random_time_new_start = 0
+            random_time_new_end = 0
+
+        self.start_time = dt.datetime.strptime(start_time, "%H:%M:%S")+ dt.timedelta(minutes = random_time_new_start)
+        self.end_time = dt.datetime.strptime(end_time, "%H:%M:%S")+ dt.timedelta(minutes = random_time_new_end)
+
+        # now we check if we are in the time window
+        self.check_time(device)
+        return
+
+    def check_time(self,device):
+
+        now = dt.datetime.now()
+        current_time = now.time()
+
+        if(current_time > self.start_time.time() and current_time <= self.end_time.time()):
+            if(self.device_on[device] == False):
+                
+                self.IKC.turn_on(device)
+                self.device_on[device] = True
 
 
+        else: # we only do something if lights are on
+            if(self.device_on[device] == True):
+                self.IKC.turn_off(device)
+                self.device_on[device] = False
+        return
 
 if __name__ == "__main__":
     app = QApplication([])
     config_file = "/Users/klein/git/light_control/config/light_control.json"
     window = lc_main(config_file = config_file )
+    
     window.show()
     app.exec()           
