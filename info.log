@@ -1,2 +1,9 @@
 2026-04-25T15:52:54.798716+0200 - __main__-   __init__ -70- WARNING    - error in configuration, opening dialog
 2026-04-25T15:53:14.261906+0200 - __main__-   CloseApp -80- INFO    - closing down
+2026-04-26T14:30:44.915626+0200 - __main__-   CloseApp -102- INFO    - closing down
+2026-04-26T14:33:26.611565+0200 - __main__-   CloseApp -102- INFO    - closing down
+2026-04-26T14:33:44.194918+0200 - __main__-   CloseApp -102- INFO    - closing down
+2026-04-26T14:38:48.440468+0200 - __main__-   CloseApp -102- INFO    - closing down
+2026-04-26T14:41:00.808059+0200 - __main__-   CloseApp -102- INFO    - closing down
+2026-04-26T14:46:45.870570+0200 - __main__-   __init__ -88- WARNING    - error in configuration, opening dialog
+2026-04-26T14:47:00.732551+0200 - __main__-   CloseApp -101- INFO    - closing down
