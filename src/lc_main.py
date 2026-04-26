@@ -19,13 +19,17 @@
 # but it can be run on any system that has python and the required libraries installed. However it communicates with a MQTT dongle, in my case
 # connected to a raspberry pi 4 which is running home assistant
 # the system is designed to be run as a service on the raspberry pi, but it can also be run as a standalone application.
-
+# In the json file you select which sensor is active in the active senor list
 
 #regular imports
 import os
 import sys
 import platform
 from loguru import logger
+import astral as AT
+from astral.sun import sun
+import datetime as dt
+import random as RT
 
 # my imports
 import lc_config as LC
@@ -102,8 +106,16 @@ class lc_main(QMainWindow):
             self.myconf = LC.lc_config(config_file = self.config_file)
 
 
-    #Now intialized the lc_control class
-        self.mycontrol = LCO.set_light(astral_info = self.myconf.astral_info)
+
+        #initialze astral
+        self.SetupAstral()
+
+        #initialize the IKEA class
+        self.IKC = IKC.IkeaControl( host = self.myconf.host,username=self.myconf.username)
+        #self.IKC.turn_on('ikea_5')
+        self.IKC.turn_off('ikea_5')
+
+
 
 
     def CloseApp(self):
@@ -149,12 +161,34 @@ class lc_main(QMainWindow):
  
         return
 
+    def SetupAstral(self):
+        myl = AT.LocationInfo()
+        myl.name        = self.myconf.astral_name
+        myl.region      = self.myconf.astral_region
+        myl.timezone    = self.myconf.astral_timezone
+        myl.latitude    = self.myconf.astral_latitude
+        myl.longitude   = self.myconf.astral_longitude
+    
+        self.myl        = myl
+
+        self.Get_Sun()
+        return 
+    
+    def Get_Sun(self):
+        s_tmp = sun(self.myl.observer,date=dt.datetime.today(),tzinfo=self.myl.timezone)
+        self.my_sunrise     = s_tmp['sunrise'].strftime('%H:%M:%S')
+        self.my_sunset      = s_tmp['sunset'].strftime('%H:%M:%S')
+        return
+    
+
+
+
 
 
 
 if __name__ == "__main__":
     app = QApplication([])
-    config_file = None
+    config_file = "/Users/klein/git/light_control/config/light_control.json"
     window = lc_main(config_file = config_file )
     window.show()
     app.exec()           

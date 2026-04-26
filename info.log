@@ -19,3 +19,18 @@
 2026-04-26T15:43:29.202397+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
 2026-04-26T15:44:46.366848+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
 2026-04-26T15:46:50.824089+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
+2026-04-26T15:47:47.651410+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
+2026-04-26T15:50:10.465626+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
+2026-04-26T15:50:20.764724+0200 - __main__-   CloseApp -110- INFO    - closing down
+2026-04-26T16:14:58.025371+0200 - __main__-   __init__ -94- WARNING    - error in configuration, opening dialog
+2026-04-26T16:16:16.211085+0200 - __main__-   __init__ -96- WARNING    - error in configuration, opening dialog
+2026-04-26T16:16:23.954660+0200 - __main__-   CloseApp -114- INFO    - closing down
+2026-04-26T16:20:36.993226+0200 - __main__-   __init__ -96- WARNING    - error in configuration, opening dialog
+2026-04-26T16:25:16.836959+0200 - __main__-   __init__ -96- WARNING    - error in configuration, opening dialog
+2026-04-26T16:25:27.449952+0200 - __main__-   CloseApp -120- INFO    - closing down
+2026-04-26T16:26:23.148128+0200 - __main__-   __init__ -96- WARNING    - error in configuration, opening dialog
+2026-04-26T16:26:31.929942+0200 - __main__-   CloseApp -121- INFO    - closing down
+2026-04-26T16:27:02.386741+0200 - __main__-   __init__ -96- WARNING    - error in configuration, opening dialog
+2026-04-26T16:27:10.754945+0200 - __main__-   CloseApp -122- INFO    - closing down
+2026-04-26T16:28:04.574986+0200 - __main__-   CloseApp -122- INFO    - closing down
+2026-04-26T16:39:56.260998+0200 - __main__-   CloseApp -122- INFO    - closing down
