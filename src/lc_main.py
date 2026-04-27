@@ -188,11 +188,18 @@ class lc_main(QMainWindow):
     
 
     def RunLoop(self):
-        # first we turn all the sensors off
+        # first we turn all the sensors off and initailze the device properties in a dictionary for easy access later
+        self.device_properties = {}
         for device in self.myconf.active_sensors:
             self.IKC.turn_off(device)
             self.device_on[device] = False
+            self.device_properties[device]= {"start_time": getattr(self.myconf, f"{device}_start"),
+                                        "end_time": getattr(self.myconf, f"{device}_end"),
+                                        "window": getattr(self.myconf, f"{device}_window"),
+                                        "action": getattr(self.myconf, f"{device}_action")}
+        self.SetupDevices()
 
+            
 
        # here we continually loop over time
         # loop_time is how often in units of minutes
@@ -201,11 +208,46 @@ class lc_main(QMainWindow):
             #  
             for device in self.myconf.active_sensors:
                     # check the time for each device
-                    self.check_device(device)
+                    self.check_time(device)
 
-            time.sleep(self.myconf.loop_time*60)
-            #time.sleep(1)
-            
+            #time.sleep(self.myconf.loop_time*60)
+            time.sleep(1)
+        return
+
+    def SetupDevices(self):  
+        # here we calculate the times for each device and store them in a dictionary for easy access later   
+        #    
+        for device in self.myconf.active_sensors:
+            start_time =self.device_properties[device]["start_time"]
+            end_time = self.device_properties[device]["end_time"]
+            mywindow = self.device_properties[device]["window"]
+            action = self.device_properties[device]["action"]
+
+            # if the action is blank, we do not use this device
+            if action == "":
+                return
+
+        # if the window is not 0, we use it to set a random start and end time
+            if mywindow > 0:
+                random_time_new_start = RT.uniform(-mywindow/2, mywindow/2)
+                random_time_new_end = RT.uniform(-mywindow/2, mywindow/2)
+            elif mywindow == -1:
+                random_time_new_start = RT.uniform(-20/2, 20/2)  # with sunset we also ransomize but a smaller window
+                random_time_new_end = RT.uniform(-20/2, 20/2)
+                start_time = self.my_sunset
+            else:
+                random_time_new_start = 0
+                random_time_new_end = 0
+
+            start_time = dt.datetime.strptime(start_time, "%H:%M:%S") #+ dt.timedelta(minutes = random_time_new_start)
+        
+            end_time = dt.datetime.strptime(end_time, "%H:%M:%S")#+ dt.timedelta(minutes = random_time_new_end)
+            # put the new values back into the dictionary
+            self.device_properties[device]["start_time"] = start_time
+            self.device_properties[device]["end_time"] = end_time
+
+        return
+
 
     def check_device(self,device):
         # this checks the time for a given device and performs the action if the time is within the window
@@ -250,9 +292,8 @@ class lc_main(QMainWindow):
 
 
 
-        print(f"current time: {current_time}, start time: {self.start_time.time()}, end time: {self.end_time.time()}")
 
-        if(current_time > self.start_time.time() and current_time <= self.end_time.time()):
+        if(current_time > self.device_properties[device]["start_time"].time() and current_time <= self.device_properties[device]["end_time"].time()):
             if(self.device_on[device] == False):
                 
                 self.IKC.turn_on(device)
