@@ -229,20 +229,21 @@ class lc_main(QMainWindow):
 
         # if the window is not 0, we use it to set a random start and end time
             if mywindow > 0:
-                random_time_new_start = RT.uniform(-mywindow/2, mywindow/2)
-                random_time_new_end = RT.uniform(-mywindow/2, mywindow/2)
+                random_time_new_start = RT.uniform(-mywindow/120., mywindow/120.) # get back to minutes
+                random_time_new_end = RT.uniform(-mywindow/120., mywindow/120)
             elif mywindow == -1:
-                random_time_new_start = RT.uniform(-20/2, 20/2)  # with sunset we also ransomize but a smaller window
-                random_time_new_end = RT.uniform(-20/2, 20/2)
+                random_time_new_start = RT.uniform(-20./2, 20./2)  # with sunset we also ransomize but a smaller window
+                random_time_new_end = RT.uniform(-20./2, 20./2)
                 start_time = self.my_sunset
             else:
                 random_time_new_start = 0
                 random_time_new_end = 0
 
-            start_time = dt.datetime.strptime(start_time, "%H:%M:%S") #+ dt.timedelta(minutes = random_time_new_start)
+            start_time = dt.datetime.strptime(start_time, "%H:%M:%S") + dt.timedelta(minutes = random_time_new_start)
         
-            end_time = dt.datetime.strptime(end_time, "%H:%M:%S")#+ dt.timedelta(minutes = random_time_new_end)
+            end_time = dt.datetime.strptime(end_time, "%H:%M:%S")+ dt.timedelta(minutes = random_time_new_end)
             # put the new values back into the dictionary
+            print(start_time.strftime('%H:%M:%S'),end_time.strftime('%H:%M:%S'))
             self.device_properties[device]["start_time"] = start_time
             self.device_properties[device]["end_time"] = end_time
 
