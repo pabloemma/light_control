@@ -316,7 +316,7 @@ if __name__ == "__main__":
     else:
         print(' This os is not supported %s' % platform.system())
         sys.exit(1) 
-    config_file = "/Users/klein/git/light_control/config/light_control.json"
+    
     window = lc_main(config_file = config_file )
     
     window.show()
