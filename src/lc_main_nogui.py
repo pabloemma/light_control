@@ -42,42 +42,14 @@ import lc_control as LCO
 
 
 #pyside block
-from PySide6.QtWidgets import (QApplication,
-                               QFileDialog,
-                               QDialog, 
-                               QLabel,
-                                QMainWindow, 
-                                QMenu,
-                                QPushButton,
-                                QVBoxLayout,
-                                QWidget)
 
-
-
-class lc_main(QMainWindow):
+class lc_main(object):
     def __init__(self,config_file = None):
 
 
         super().__init__()
 
-    #setup pyside6
-        self.setWindowTitle("Light Control")
-        myLabel = QLabel("light control vs 1.0")
-        myCloseButton = QPushButton("Close")
-        myCloseButton.clicked.connect(self.CloseApp)
-        layout= QVBoxLayout()
-        layout.addWidget(myLabel)
-        layout.addWidget(myCloseButton)
-
-
-        widget = QWidget()
-        widget.setLayout(layout)
-
- 
-
-        self.setCentralWidget(widget)
-        self.show()
-
+  
 
     # setup system
 
@@ -90,23 +62,18 @@ class lc_main(QMainWindow):
         # default config_file
         if(self.config_file == None or not os.path.exists(self.config_file)):
             #give default name
-  
+            logger.error(f"Error loading configuration file: {e}")
+            sys.exit(1)
+ 
 
 
+
+        else:
             try:
-                logger.warning("error in configuration, opening dialog")
-                self.config_file , filter = QFileDialog.getOpenFileName(self,
-                                self.tr("Open Config file"), "~", self.tr("*.json"))
-                
                 self.myconf = LC.lc_config(config_file = self.config_file)
-
             except Exception as e:
                 logger.error(f"Error loading configuration file: {e}")
                 sys.exit(1)
-        else:
-            self.myconf = LC.lc_config(config_file = self.config_file)
-
-
 
         #initialze astral
         self.SetupAstral()
@@ -309,7 +276,7 @@ class lc_main(QMainWindow):
         return
 
 if __name__ == "__main__":
-    app = QApplication([])
+
     if platform.system() == 'Darwin':
         config_file = '/Users/klein/git/light_control/config/light_control.json'
     elif platform.system() == 'Linux':
@@ -318,7 +285,4 @@ if __name__ == "__main__":
         print(' This os is not supported %s' % platform.system())
         sys.exit(1) 
     
-    window = lc_main(config_file = config_file )
-    
-    window.show()
-    app.exec()           
+    lc_main(config_file = config_file)
