@@ -309,6 +309,13 @@ class lc_main(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication([])
+    if platform.system() == 'Darwin':
+        config_file = '/Users/klein/git/light_control/config/light_control.json'
+    elif platform.system() == 'Linux':
+        config_file = '/home/klein/git/light_control/config/light_control.json'
+    else:
+        print(' This os is not supported %s' % platform.system())
+        sys.exit(1) 
     config_file = "/Users/klein/git/light_control/config/light_control.json"
     window = lc_main(config_file = config_file )
     
