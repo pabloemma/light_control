@@ -18,15 +18,15 @@
         "timezone" : "Europe/Paris"
     },
     "mysensors" : {
-        "active_sensors" : ["ikea_2", "ikea_5"]
+        "active_sensors" : ["ikea_1","ikea_2", "ikea_5"]
         },
    "devices" :{
         "sensor_1" : {
             "ikea_1":{
-                "start_time" : "18:00:00",
-                "end_time" : "23:00:00",
+                "start_time" : "16:00:00",
+                "end_time" : "06:00:00",
                 "action" : "ON",
-                "window"  : 20
+                "window"  : 0
                    
                 }
             },
