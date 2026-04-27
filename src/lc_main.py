@@ -88,7 +88,7 @@ class lc_main(QMainWindow):
         self.config_file = config_file
 
         # default config_file
-        if(self.config_file == None) :
+        if(self.config_file == None or not os.path.exists(self.config_file)):
             #give default name
   
 
