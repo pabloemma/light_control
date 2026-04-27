@@ -228,17 +228,23 @@ class lc_main(QMainWindow):
             random_time_new_start = 0
             random_time_new_end = 0
 
-        self.start_time = dt.datetime.strptime(start_time, "%H:%M:%S")+ dt.timedelta(minutes = random_time_new_start)
-        self.end_time = dt.datetime.strptime(end_time, "%H:%M:%S")+ dt.timedelta(minutes = random_time_new_end)
+        self.start_time = dt.datetime.strptime(start_time, "%H:%M:%S") #+ dt.timedelta(minutes = random_time_new_start)
+        self.end_time = dt.datetime.strptime(end_time, "%H:%M:%S")#+ dt.timedelta(minutes = random_time_new_end)
 
-        # now we check if we are in the time window
+ 
+        print(device)
         self.check_time(device)
         return
 
+    #def check_time(self,device):
     def check_time(self,device):
 
         now = dt.datetime.now()
         current_time = now.time()
+
+
+
+        print(f"current time: {current_time}, start time: {self.start_time.time()}, end time: {self.end_time.time()}")
 
         if(current_time > self.start_time.time() and current_time <= self.end_time.time()):
             if(self.device_on[device] == False):
