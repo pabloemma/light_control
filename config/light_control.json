@@ -24,7 +24,7 @@
         "sensor_1" : {
             "ikea_1":{
                 "start_time" : "16:00:00",
-                "end_time" : "23:59:00",
+                "end_time" : "05:59:00",
                 "action" : "ON",
                 "window"  : 0
                    
