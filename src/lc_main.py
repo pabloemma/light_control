@@ -127,6 +127,7 @@ class lc_main(QMainWindow):
     def CloseApp(self):
         logger.info("closing down")
         self.close()
+        sys.exit()
      
 
 
