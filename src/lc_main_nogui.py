@@ -260,8 +260,18 @@ class lc_main(object):
         current_time = now.time()
 
 
-        #if(self.device_properties[device]["start_time"].time() > self.device_properties[device]["end_time"].time()):
+        if(self.device_properties[device]["start_time"].time() > self.device_properties[device]["end_time"].time()):
             # we are going over midnight, so need to correct this
+            # we run anyway until we go thorugh midnight and then we move over to end_time
+            if current_time > self.device_properties[device]["start_time"].time() or current_time <= self.device_properties[device]["end_time"].time():
+                if(self.device_on[device] == False):
+                    self.IKC.turn_on(device)
+                    self.device_on[device] = True
+            else:
+                if(self.device_on[device] == True):
+                    self.IKC.turn_off(device)
+                    self.device_on[device] = False
+            return  
 
         if(current_time > self.device_properties[device]["start_time"].time() and current_time <= self.device_properties[device]["end_time"].time()):
             if(self.device_on[device] == False):
