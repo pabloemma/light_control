@@ -32,8 +32,8 @@
             },
          "sensor_2" : {
             "ikea_2":{
-                "start_time" : "03:00:00",
-                "end_time" : "23:00:00",
+                "start_time" : "20:00:00",
+                "end_time" : "22:00:00",
                 "action" : "ON",    
                 "window"  : 20
                 }
@@ -56,7 +56,7 @@
             },
         "sensor_5" : {
             "ikea_5":{
-                "start_time" : "18:00:00",
+                "start_time" : "13:00:00",
                 "end_time" : "23:00:00",
                 "action" : "ON",
                 "window"  : 20

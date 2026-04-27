@@ -188,7 +188,13 @@ class lc_main(QMainWindow):
     
 
     def RunLoop(self):
-       # here we coontinually loop over time
+        # first we turn all the sensors off
+        for device in self.myconf.active_sensors:
+            self.IKC.turn_off(device)
+            self.device_on[device] = False
+
+
+       # here we continually loop over time
         # loop_time is how often in units of minutes
         while True:
             # iterate over all the acive devices
@@ -197,8 +203,8 @@ class lc_main(QMainWindow):
                     # check the time for each device
                     self.check_device(device)
 
-            #time.sleep(self.myconf.loop_time*60)
-            time.sleep(1)
+            time.sleep(self.myconf.loop_time*60)
+            #time.sleep(1)
             
 
     def check_device(self,device):
