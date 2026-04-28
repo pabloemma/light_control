@@ -287,7 +287,9 @@ class lc_main(object):
         return
 
 if __name__ == "__main__":
-    conf = 'lc_debug.json'
+    #conf = 'lc_debug.json'
+    conf = 'light_control.json'
+
 
     if platform.system() == 'Darwin':
         config_file = '/Users/klein/git/light_control/config/'+conf
