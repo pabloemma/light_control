@@ -3,8 +3,8 @@ import subprocess
 a = 'mosquitto_pub -h 192.168.3.201  -t '
 
 
-#b0 = 'ikea_5'
-b0 = 'ikea_1' \
+b0 = 'ikea_5'
+#b0 = 'ikea_2' \
 ''
 
 b = '\'zigbee2mqtt/'+b0+'/set\' '
@@ -19,7 +19,8 @@ d =  ' -d -u \'addons\' -P \'phooGhu0au4zaem3ooB5yapheM1oXaifishiubooH0quio2Ziig
 
 
 e = a + b + c + d
-
+#e = a + b  + d
+print(e)
 
 
 subprocess.Popen(e,shell=True)

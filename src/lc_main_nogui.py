@@ -62,7 +62,7 @@ class lc_main(object):
         # default config_file
         if(self.config_file == None or not os.path.exists(self.config_file)):
             #give default name
-            logger.error(f"Error loading configuration file: {e}")
+            logger.error(f"Error loading configuration file: ,selected file {self.config_file} does not exist ")
             sys.exit(1)
  
 
@@ -287,11 +287,12 @@ class lc_main(object):
         return
 
 if __name__ == "__main__":
+    conf = 'lc_debug.json'
 
     if platform.system() == 'Darwin':
-        config_file = '/Users/klein/git/light_control/config/light_control.json'
+        config_file = '/Users/klein/git/light_control/config/'+conf
     elif platform.system() == 'Linux':
-        config_file = '/home/klein/git/light_control/config/light_control.json'
+        config_file = '/home/klein/git/light_control/config/'+ conf
     else:
         print(' This os is not supported %s' % platform.system())
         sys.exit(1) 
