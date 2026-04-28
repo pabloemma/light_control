@@ -1,0 +1,78 @@
+{
+    "system": {
+        "name": "Ikea  Control System",
+        "version": "1.0",
+        "description": "A system to control ikea based on various parameters."
+    },
+    "settings": {
+        "host" : "192.168.3.201",
+        "PWfile" : "light.txt",
+        "username" : "addons",
+        "loop_time" : 5
+    },
+    "astral_info" : {
+        "latitude" : 47.55224,
+        "longitude" : 7.62016,
+        "name" : "Basel",
+        "region" : "Switzerland",
+        "timezone" : "Europe/Paris"
+    },
+    "mysensors" : {
+        "active_sensors" : ["ikea_1","ikea_2", "ikea_5"]
+        },
+   "devices" :{
+        "sensor_1" : {
+            "ikea_1":{
+                "start_time" : "16:00:00",
+                "end_time" : "05:59:00",
+                "action" : "ON",
+                "window"  : 0
+                   
+                }
+            },
+         "sensor_2" : {
+            "ikea_2":{
+                "start_time" : "20:00:00",
+                "end_time" : "22:00:00",
+                "action" : "ON",    
+                "window"  : 20
+                }
+            },
+        "sensor_3" : {
+            "ikea_3":{
+                "start_time" : "18:00:00",
+                "end_time" : "23:00:00",
+                "action" : "ON",
+                "window"  : 20
+                }
+            },
+        "sensor_4" : {
+            "ikea_4":{
+                "start_time" : "18:00:00",
+                "end_time" : "23:00:00",
+                "action" : "ON",
+                "window"  : 20
+                }
+            },
+        "sensor_5" : {
+            "ikea_5":{
+                "start_time" : "13:00:00",
+                "end_time" : "23:00:00",
+                "action" : "ON",
+                "window"  : 20
+                }
+            },
+        "sensor_6" : {
+            "ikea_6":{
+                "start_time" : "18:00:00",
+                "end_time" : "23:00:00",
+                "action" : "ON",
+                "window"  : 20
+                }
+            }
+        }
+
+
+
+
+}
