@@ -152,6 +152,10 @@ class lc_main(object):
         s_tmp = sun(self.myl.observer,date=dt.datetime.today(),tzinfo=self.myl.timezone)
         self.my_sunrise     = s_tmp['sunrise'].strftime('%H:%M:%S')
         self.my_sunset      = s_tmp['sunset'].strftime('%H:%M:%S')
+        print(f"\n\n*************************************************************\n\n")
+        print(f"sunrise is at {self.my_sunrise} and sunset is at {self.my_sunset}")
+        print(f"\n\n*************************************************************\n\n")
+        
         return
     
 
@@ -267,11 +271,17 @@ class lc_main(object):
                 if(self.device_on[device] == False):
                     self.IKC.turn_on(device)
                     self.device_on[device] = True
-            else:
+                    return
+            else: # we are outside the time window, so we turn off the device if it is on
                 if(self.device_on[device] == True):
                     self.IKC.turn_off(device)
                     self.device_on[device] = False
-            return  
+                    return
+            return
+        else:   
+            return 
+
+         
 
         if(current_time > self.device_properties[device]["start_time"].time() and current_time <= self.device_properties[device]["end_time"].time()):
             if(self.device_on[device] == False):
@@ -287,8 +297,8 @@ class lc_main(object):
         return
 
 if __name__ == "__main__":
-    #conf = 'lc_debug.json'
-    conf = 'light_control.json'
+    conf = 'lc_debug.json'
+    #conf = 'light_control.json'
 
 
     if platform.system() == 'Darwin':

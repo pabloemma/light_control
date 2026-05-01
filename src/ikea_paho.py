@@ -9,6 +9,7 @@ class MyMQTTClient(mqtt.Client):
 
         #initialize the MQTT client and set the on_connect and on_message callbacks
         MQC = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+        #MQC = mqtt.Client()
 
         #Set username and password
         uname = 'addons'
@@ -22,7 +23,7 @@ class MyMQTTClient(mqtt.Client):
         MQC.connect("192.168.3.201", 1883, 60)
 
 
-        msq_info = MQC.publish('zigbee2mqtt/ikea_5/set', 'ON', qos=1)
+        msq_info = MQC.publish('zigbee2mqtt/ikea_2/set', 'OFF', qos=1)
         print(msq_info)
     
 
@@ -52,4 +53,4 @@ class MyMQTTClient(mqtt.Client):
 
 if __name__ == "__main__":
     client = MyMQTTClient()
-    #client.loop_forever()   
+    client.loop_forever()   
