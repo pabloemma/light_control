@@ -124,7 +124,7 @@ class lc_main(object):
 
 
         fmt =  "{time} - {name}-   {function} -{line}- {level}    - {message}"
-        logger.add('info.log', format = fmt , level = 'INFO',rotation="1 day")
+        logger.add('/home/klein/git/light_control/info.log', format = fmt , level = 'INFO',rotation="1 day")
 
 
         # set the colors of the different levels
