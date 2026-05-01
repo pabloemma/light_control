@@ -10,7 +10,7 @@ class IkeaControl(object):
         self.host = host
         self.username = username
         if password is None:
-            f = open("config/light.txt")
+            f = open("/home/klein/git/light_controlconfig/light.txt")
 
             self.password = f.read().strip()  
             f.close()  
