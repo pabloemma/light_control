@@ -1,0 +1,14 @@
+[Unit]
+Description=lightcontrol  
+After=network.targetStart
+StartLimitItervalSec=0
+
+[Service]
+ExecStart=/home/klein/git/light_control/myenv/bin/python /home/klein/git/light_control/src/lc_main_nogui.py
+Restart=always
+RestartSec=20
+User=klein
+
+
+[Install]
+WantedBy=multi-user.target
