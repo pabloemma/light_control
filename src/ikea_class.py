@@ -1,6 +1,7 @@
 # class to tunr the ikea outlest on and off
 #very simple code
 
+import platform
 import subprocess
 
 
@@ -10,7 +11,10 @@ class IkeaControl(object):
         self.host = host
         self.username = username
         if password is None:
-            f = open("/home/klein/git/light_control/config/light.txt")
+            if platform.system() == 'Darwin':
+                f = open("/Users/klein/git/light_control/config/light.txt")
+            elif platform.system() == 'Linux':
+                f = open("/home/klein/git/light_control/config/light.txt")
 
             self.password = f.read().strip()  
             f.close()  

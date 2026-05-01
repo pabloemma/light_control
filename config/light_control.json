@@ -23,8 +23,8 @@
    "devices" :{
         "sensor_1" : {
             "ikea_1":{
-                "start_time" : "12:01:00",
-                "end_time" : "12:10:00",
+                "start_time" : "12:10:00",
+                "end_time" : "12:42:00",
                 "action" : "ON",
                 "window"  : 0
                    

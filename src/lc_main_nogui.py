@@ -124,7 +124,11 @@ class lc_main(object):
 
 
         fmt =  "{time} - {name}-   {function} -{line}- {level}    - {message}"
-        logger.add('/home/klein/git/light_control/info.log', format = fmt , level = 'INFO',rotation="1 day")
+        if platform.system() == 'Darwin':
+
+            logger.add('/Users/klein/git/light_control/info.log', format = fmt , level = 'INFO',rotation="1 day")
+        else:
+            logger.add('/home/klein/git/light_control/info.log', format = fmt , level = 'INFO',rotation="1 day")
 
 
         # set the colors of the different levels
@@ -278,8 +282,7 @@ class lc_main(object):
                     self.device_on[device] = False
                     return
             return
-        else:   
-            return 
+        
 
          
 
