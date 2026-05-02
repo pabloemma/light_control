@@ -7,15 +7,15 @@ import os
 import sys
 import platform
 import json
-
+import time
 
 
 #My imports, I am using the config mechanism from lc_main_nogui
 import lc_config as LC
 
-class IkeaPahoClient(mqtt.Client):
-    def __init__(self,config_file=None, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+class IkeaPahoClient:
+    def __init__(self,config_file=None):
+        #super().__init__(*args, **kwargs)
 
 
         self.SetupLogger()
@@ -46,33 +46,40 @@ class IkeaPahoClient(mqtt.Client):
             f = open("/Users/klein/git/light_control/config/light.txt")
         elif platform.system() == 'Linux':
             f = open("/home/klein/git/light_control/config/light.txt")
+        else:
+            logger.error(f"Unsupported operating system: {platform.system()}")
+            sys.exit(1) 
 
-        self.password = f.read().strip()  
+        
+        pw = f.read().strip()  
         f.close()  
 
  
-        self.user_name = self.myconf.username
-        self.password = self.password
-        self.host = self.myconf.host
-        self.port = 1883  
+        uname = self.myconf.username
+        
+        host = self.myconf.host
+        port = 1883  
 
 
  
         #initialize the MQTT client and set the on_connect and on_message callbacks
-        MQC = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+        self.MQC=MQC = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
 
         # now we connect to the broker
 
         #Set username and password
 
-        MQC.username_pw_set(self.user_name, self.password)
-        MQC.connect(self.host, self.port, 60)
-
+        MQC.username_pw_set(uname, pw)
+        #MQC.connect(host, port, 60)
+        #MQC.publish("zigbee2mqtt/ikea_5/set", "OFF")
+        #self.mysubscribe("zigbee2mqtt/ikea_5/set")
+        #self.mypublish("zigbee2mqtt/ikea_5/set", "OFF")
 
 
         MQC.on_connect = self.on_connect
         MQC.on_message = self.on_message
-        MQC.on_publish = self.on_publish
+        #MQC.on_publish = self.on_publish
+        #MQC.on_subscribe = self.on_subscribe    
 
 
 
@@ -101,7 +108,41 @@ class IkeaPahoClient(mqtt.Client):
  
         return
 
+    def on_connect( self,client, userdata, flags, rc,properties):
+        logger.info(f"Connected with result code {rc}") 
+        return
 
+    def on_message( self,client, userdata, msg):
+        logger.info(f"Received message on topic {msg.topic} with payload {msg.payload}")    
+        return  
+    
+    def on_publish(self,client, userdata, mid, reason_code, properties):
+        # reason_code and properties will only be present in MQTTv5. It's always unset in MQTTv3
+
+        try:
+            userdata.remove(mid)
+        except KeyError:
+            logger.warning("on_publish() is called with a mid not present in unacked_publish")
+        
+    def mypublish(self, topic, payload, qos=0, retain=False):
+        msg_info = self.MQC.publish(topic, payload, qos, retain)
+        return msg_info
+    
+    def mysubscribe(self, topic, qos=0):
+        result, mid = self.MQC.subscribe(topic, qos)
+        return result, mid
+
+    def on_subscribe(self,client, userdata, mid, reason_code_list, properties):
+        # Since we subscribed only for a single channel, reason_code_list contains only one item.
+        logger.info(f"Subscribed with mid {mid}, reason code {reason_code_list[0]}")
+        return
+    def start(self):
+        self.MQC.connect(self.myconf.host, 1883, 60)
+        self.MQC.loop_start()
+
+    def stop(self):
+        self.MQC.loop_stop()
+        self.MQC.disconnect()
 
 if __name__ == "__main__":
 
@@ -118,7 +159,13 @@ if __name__ == "__main__":
 
 
     client = IkeaPahoClient(config_file=config_file)
-    
+    client.start() #start the loop
+    # first we subscribe to the topic we want to listen to, in this case we want to listen to the topic that the ikea outlet is publishing to, which is zigbee2mqtt/ikea_5/set
+    client.mysubscribe("zigbee2mqtt/ikea_5/set")
+    # now publish something to the broker
+    client.mypublish("zigbee2mqtt/ikea_5/set", "OFF")   
+    time.sleep(10)
+    client.stop()
                    
 
         

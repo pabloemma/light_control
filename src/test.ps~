@@ -1,12 +1,12 @@
 %!PS-Adobe-3.0
-%%Title: lc_control.py
+%%Title: lc_main.py
 %%For: Andi Klein
 %%Creator: a2ps version 4.15.5
-%%CreationDate: Sun Apr 26 14:54:02 2026
+%%CreationDate: Mon Apr 27 13:55:48 2026
 %%BoundingBox: 24 24 588 767
 %%DocumentData: Clean7Bit
 %%Orientation: Landscape
-%%Pages: 3
+%%Pages: 5
 %%PageOrder: Ascend
 %%DocumentMedia: Letter 612 791 0 () ()
 %%DocumentNeededResources: font Courier
@@ -776,134 +776,102 @@ llx lly 12 add translate
 /x0 x v get 3.780000 add sx cw mul add store
 /y0 y v get bfs th add sub store
 x0 y0 moveto
-(1) # (# this is the control of the lights on hw level) c n
-(2) # () N
-(3) # () N
-(4) # () N
-(5) # (#regular imports) N
-(6) # () S
+(1) # (# light control_main ist the main control for the random light at a house) c n
+(2) # (# it will be connected to a push button to turn it on and off) N
+(3) # (#there will be a list of how many toime windows and when) N
+(4) # (# which will be controlled thorugh a config json filerurrently there are 6 ikea outlets defined in the config file;) N
+(5) # (#however I have only 5, #3 does not exist) N
+(6) # (# A switch is used in the system if it has an action eithe ON or OFF.) N
+(7) # (#if the action is blank then that switch is not being used.) N
+(8) # (# There is a start and end time and a window. If the widonw is 0, it means to use the exact start and end time) N
+(9) # (# if the winodw has a value this is used to set a start time and endtime randomly within that window, if the window is -1, it deter) N
+0 T (mines the sunset) N
+(10) # (#for the location and then uses this as the start time and then the end time is determined by the window.) N
+(11) # (# So the window can either be for randomness or length of action .) N
+(12) # (# The window is used to make the light more random and less predictable.) N
+(13) # (# as an example: starttime = 18:00, window :60 will mean that the start time will be somewhere between 17:30 and 18:30 and the same) N
+0 T ( for the) N
+(14) # (# end time. This is to make the light more random and less predictable.) N
+(15) # (# the loop time is in munutes and is used to determine how often the system checks the time and the actions. The system will check ) N
+0 T (every loop time if any of the actions need to be performed.) N
+(16) # (# NOTE: Currently the system has only two actions either OFF or ON. The beavior is that the action selected is valid for the chosen) N
+0 T ( time windwo.) N
+(17) # (#) N
+(18) # (# The system controls throgh zigbee2mqtt and mosquitto_pub, the ikea outlets. The system is designed to be run on a raspberry pi, ) N
+(19) # (# but it can be run on any system that has python and the required libraries installed. However it communicates with a MQTT dongle,) N
+0 T ( in my case) N
+(20) # (# connected to a raspberry pi 4 which is running home assistant) N
+(21) # (# the system is designed to be run as a service on the raspberry pi, but it can also be run as a standalone application.) N
+(22) # (# In the json file you select which sensor is active in the active senor list) N
+(23) # () N
+(24) # (#regular imports) N
+(25) # () S
 (import) K
 ( os) p n
-(7) # () S
+(26) # () S
 (import) K
 ( sys) p n
-(8) # () S
+(27) # () S
 (import) K
 ( platform) p n
-(9) # () S
+(28) # () S
 (from) K
 ( loguru ) p
 (import) K
 ( logger) p n
-(10) # () S
+(29) # () S
 (import) K
-( time) p n
-(11) # () S
-(import) K
-( datetime as dt) p n
-(12) # () S
-(import) K
-( astral as AT ) p
-(# to get sunrise and sunset) c n
-(13) # () S
-(import) K
-( control_relay as CR) p n
-(14) # () S
+( astral as AT) p n
+(30) # () S
 (from) K
 ( astral.sun ) p
 (import) K
 ( sun) p n
-(15) # () S
+(31) # () S
+(import) K
+( datetime as dt) p n
+(32) # () S
 (import) K
 ( random as RT) p n
-(16) # () S
-(# globals) c n
-(17) # () N
-(18) # () S
-(class) K
-( set_light\(object\):) p n
-(19) # () N
-(20) # (    ) S
-(def) K
-( __init__\(self,start_time = None , duration = 30, astral_info = None , random_time = None\):) p n
-(21) # ( ) N
-(22) # (        ) S
-(#default is 30 minutes duration) c n
-(23) # () S
-(        ) p
-(# the light will be on friom start_time until start_time+ durration) c n
-(24) # () S
-(        ) p
-(# the fomrat of the start_time has to be 16:30:00) c n
-(25) # () S
-(        ) p
-(# the random_time, if set should be givenm in minutes) c n
-(26) # () S
-(        ) p
-(# it will randomize the starttime by this amount) c n
-(27) # () S
-(        super\(\).__init__\(\)) p n
-(28) # () N
-(29) # (        ) S
-(#initializ the relay, there are two relays on the board) c n
-(30) # () S
-(        ) p
-(# we initialze them to off) c n
-(31) # () S
-(        self.relay = CR.MyRelay\(relay_number = 1,state = 0\)) p n
-(32) # ( ) N
-(33) # (        ) S
-(# the self.light_on is a toggle switch) c n
-(34) # () S
-(        ) p
-(# tme moment the time condition is fulfilled it will be switched to True) c n
+(33) # () S
+(import) K
+( time) p n
+(34) # () N
 (35) # () S
-(        self.light_on = False) p n
-(36) # (        self.astral_info = astral_info) N
-(37) # () N
-(38) # (        ) S
-(if) K
-( random_time != None :) p n
-(39) # (            ) S
-(# set the seed) c n
+(# my imports) c n
+(36) # () S
+(import) K
+( lc_config as LC) p n
+(37) # () S
+(import) K
+( ikea_class as IKC  ) p n
+(38) # () S
+(import) K
+( lc_control as LCO ) p n
+(39) # () N
 (40) # () S
-(            RT.seed\(\)) p n
-(41) # (            random_time_new =  RT.random\(\)*random_time) N
-(42) # (            ) S
-(# using 30 , the start time now variess by the most 30 miniutes) c n
-(43) # () S
-(            self.random_time = dt.timedelta\(minutes = random_time_new\)) p n
-(44) # (        ) S
-(else) K
-(:) p n
-(45) # (            self.random_time = dt.timedelta\(minutes = 0\)) N
-(46) # () N
-(47) # (        ) S
-(# if astral_info is not None, we use sunset and sunrise) c n
-(48) # () S
-(        ) p
-(# else we use start_time) c n
-(49) # () N
-(50) # () S
-(        ) p
-(if) K
-(\(astral_info == None\):) p n
-(51) # () N
-(52) # () N
-(53) # (            self.duration = dt.timedelta\(minutes = duration\)) N
-(54) # (            ) S
-(#this creates a datetime.datetime obj) c n
-(55) # () S
-(            self.start_time = dt.datetime.strptime\(start_time, ") p
-(%H:%M:%S) str
-("\)+ self.random_time) p n
-(56) # (            self.end_time = self.start_time+self.duration) N
-(57) # ( ) N
-(lc_control.py) (Page 1/3) (Apr 26, 2026 14:49) title
+(# globals) c n
+(41) # () N
+(42) # () N
+(43) # () N
+(44) # (#pyside block) N
+(45) # () S
+(from) K
+( PySide6.QtWidgets ) p
+(import) K
+( \(QApplication,) p n
+(46) # (                               QFileDialog,) N
+(47) # (                               QDialog, ) N
+(48) # (                               QLabel,) N
+(49) # (                                QMainWindow, ) N
+(50) # (                                QMenu,) N
+(51) # (                                QPushButton,) N
+(52) # (                                QVBoxLayout,) N
+(lc_main.py) (Page 1/5) (Apr 27, 2026 13:50) title
 border
 grestore
 (Printed by Andi Klein) rhead
-(lc_control.py) (1/3) (Sunday April 26, 2026) footer
+(lc_main.py) (1/5) (Monday April 27, 2026) footer
 end % of iso1dict
 pagesave restore
 showpage
@@ -919,128 +887,108 @@ llx lly 12 add translate
 /x0 x v get 3.780000 add sx cw mul add store
 /y0 y v get bfs th add sub store
 x0 y0 moveto
-(58) # (            ) p
-(#self.start_time.time\(\) is then a datetime.time ) c n
+(53) # (                                QWidget\)) p n
+(54) # () N
+(55) # () N
+(56) # () N
+(57) # () S
+(class) K
+( lc_main\(QMainWindow\):) p n
+(58) # (    ) S
+(def) K
+( __init__\(self,config_file = None\):) p n
 (59) # () N
-(60) # () S
+(60) # () N
+(61) # (        super\(\).__init__\(\)) N
+(62) # () N
+(63) # (    ) S
+(#setup pyside6) c n
+(64) # () S
+(        self.setWindowTitle\(") p
+(Light Control) str
+("\)) p n
+(65) # (        myLabel = QLabel\(") S
+(light control vs 1.0) str
+("\)) p n
+(66) # (        myCloseButton = QPushButton\(") S
+(Close) str
+("\)) p n
+(67) # (        myCloseButton.clicked.connect\(self.CloseApp\)) N
+(68) # (        layout= QVBoxLayout\(\)) N
+(69) # (        layout.addWidget\(myLabel\)) N
+(70) # (        layout.addWidget\(myCloseButton\)) N
+(71) # () N
+(72) # () N
+(73) # (        widget = QWidget\(\)) N
+(74) # (        widget.setLayout\(layout\)) N
+(75) # () N
+(76) # ( ) N
+(77) # () N
+(78) # (        self.setCentralWidget\(widget\)) N
+(79) # (        self.show\(\)) N
+(80) # () N
+(81) # () N
+(82) # (    ) S
+(# setup system) c n
+(83) # () N
+(84) # () S
+(    ) p
+(# the logger) c n
+(85) # () S
+(        self.SetupLogger\(\)) p n
+(86) # () N
+(87) # (    ) S
+(# the configuration) c n
+(88) # () S
+(        self.config_file = config_file) p n
+(89) # () N
+(90) # (        ) S
+(# default config_file) c n
+(91) # () S
 (        ) p
+(if) K
+(\(self.config_file == None\) :) p n
+(92) # (            ) S
+(#give default name) c n
+(93) # () S
+(  ) p n
+(94) # () N
+(95) # () N
+(96) # (            ) S
+(try) K
+(:) p n
+(97) # (                logger.warning\(") S
+(error in configuration, opening dialog) str
+("\)) p n
+(98) # (                self.config_file , filter = QFileDialog.getOpenFileName\(self,) N
+(99) # (                                self.tr\(") S
+(Open Config file) str
+("\), ") p
+(~) str
+(", self.tr\(") p
+(*.json) str
+("\)\)) p n
+(100) # (                ) N
+(101) # (                self.myconf = LC.lc_config\(config_file = self.config_file\)) N
+(102) # () N
+(103) # (            ) S
+(except) K
+( Exception as e:) p n
+(104) # (                logger.error\(f") S
+(Error loading configuration file: {e}) str
+("\)) p n
+(105) # (                sys.exit\(1\)) N
+(106) # (        ) S
 (else) K
 (:) p n
-(61) # (        ) S
-(#set up the system for sunrise and sunset) c n
-(62) # () S
-(            self.setup_astral\(\)) p n
-(63) # (            self.duration = dt.timedelta\(minutes = duration\)) N
-(64) # (            self.start_time = dt.datetime.strptime\(self.my_sunset, ") S
-(%H:%M:%S) str
-("\)+self.raandom_time) p n
-(65) # (            self.end_time = self.start_time+self.duration) N
-(66) # () N
-(67) # (    ) N
-(68) # (    ) S
-(def) K
-( run_loop\(self,loop_time = 1\):) p n
-(69) # (        ) S
-(# here we coontinually loop over time) c n
-(70) # () S
-(        ) p
-(# loop_time is how often in units of minutes) c n
-(71) # () S
-(        ) p
-(while) K
-( True:) p n
-(72) # (            self.check_time\(\)) N
-(73) # (            time.sleep\(loop_time*60\)) N
-(74) # () N
-(75) # (    ) S
-(def) K
-( setup_astral\(self\):) p n
-(76) # (        ''') S
-(uses dictionary to fill astral location info) str
-(''') p n
-(77) # () N
-(78) # (        myl = AT.LocationInfo\(\)) N
-(79) # (        myl.name        = self.astral_info[') S
-(name) str
-(']) p n
-(80) # (        myl.region      = self.astral_info[') S
-(region) str
-(']) p n
-(81) # (        myl.timezone    = self.astral_info[') S
-(timezone) str
-(']) p n
-(82) # (        myl.latitude    = self.astral_info[') S
-(latitude) str
-(']) p n
-(83) # (        myl.longitude   = self.astral_info[') S
-(longitude) str
-(']) p n
-(84) # (    ) N
-(85) # (        self.myl        = myl) N
-(86) # () N
-(87) # (        self.Get_Sun\(\)) N
-(88) # (        ) S
-(return) K
-( ) p n
-(89) # (    ) N
-(90) # (    ) S
-(def) K
-( Get_Sun\(self\):) p n
-(91) # (        s_tmp = sun\(self.myl.observer,date=dt.datetime.today\(\),tzinfo=self.myl.timezone\)) N
-(92) # (        self.my_sunrise     = s_tmp[') S
-(sunrise) str
-('].strftime\(') p
-(%H:%M:%S) str
-('\)) p n
-(93) # (        self.my_sunset      = s_tmp[') S
-(sunset) str
-('].strftime\(') p
-(%H:%M:%S) str
-('\)) p n
-(94) # (        ) S
-(return) K n
-(95) # () S
-(    ) p n
-(96) # () N
-(97) # () N
-(98) # () N
-(99) # (    ) S
-(def) K
-( check_time\(self\):) p n
-(100) # () N
-(101) # (        now = dt.datetime.now\(\)) N
-(102) # (        current_time = now.time\(\)) N
-(103) # () N
-(104) # (        ) S
-(if) K
-(\(current_time > self.start_time.time\(\) ) p
-(and) K
-( current_time <= self.end_time.time\(\)\):) p n
-(105) # (            self.light_on = True) N
-(106) # (            self.relay.SetRelayOn\(\)) N
-(107) # (            ) S
-(print) K
-(\(") p
-( we have success) str
-("\)) p n
+(107) # (            self.myconf = LC.lc_config\(config_file = self.config_file\)) N
 (108) # () N
-(109) # (        ) S
-(else) K
-(: ) p
-(# we only do something if lights are on) c n
-(110) # () S
-(            ) p
-(if) K
-(\(self.light_on\):) p n
-(111) # (                self.light_on = False) N
-(112) # (                self.relay.SetRelayOff\(\)) N
-(113) # ( ) N
-(114) # (      ) N
-(lc_control.py) (Page 2/3) (Apr 26, 2026 14:49) title
+(109) # () N
+(lc_main.py) (Page 2/5) (Apr 27, 2026 13:50) title
 border
 grestore
 (Printed by Andi Klein) rhead
-(lc_control.py) (2/3) (Sunday April 26, 2026) footer
+(lc_main.py) (2/5) (Monday April 27, 2026) footer
 end % of iso1dict
 pagesave restore
 showpage
@@ -1056,77 +1004,413 @@ llx lly 12 add translate
 /x0 x v get 3.780000 add sx cw mul add store
 /y0 y v get bfs th add sub store
 x0 y0 moveto
-(115) # () p n
-(116) # (    ) S
-(def) K
-( turn_off_light\(self\):) p n
-(117) # () N
-(118) # (        ) S
-(print) K
-(\(") p
-(we turn off the light) str
-("\)) p n
-(119) # (        ) S
-(return) K n
+(110) # () p n
+(111) # (        ) S
+(#initialze astral) c n
+(112) # () S
+(        self.SetupAstral\(\)) p n
+(113) # () N
+(114) # (        ) S
+(#initialize the IKEA class) c n
+(115) # () S
+(        self.IKC = IKC.IkeaControl\( host = self.myconf.host,username=self.myconf.username\)) p n
+(116) # (        ) S
+(#self.IKC.turn_on\('ikea_5'\)) c n
+(117) # () S
+(        ) p
+(#self.IKC.turn_off\('ikea_5'\)) c n
+(118) # () N
+(119) # () S
+(        self.device_on = {device: False ) p
+(for) K
+( device ) p
+(in) K
+( self.myconf.active_sensors}) p n
 (120) # () N
-(121) # (if) S
-( __name__ == ") p
-(__main__) str
-(":) p n
-(122) # (    set_my_time = ") S
-(15:40:00) str
-(") p n
-(123) # (    ) S
-(# info for astral to get sunrise and sunset) c n
+(121) # () N
+(122) # () N
+(123) # (        ) S
+(# here we start) c n
 (124) # () S
-(    astral_info={') p
-(name) str
-(':') p
-(Basel) str
-(',') p
-(region) str
-(':') p
-(Switzerland) str
-(',') p
-(timezone) str
-(':') p
-(Europe/Paris) str
-(', \\) p n
-(125) # (                 ') S
-(latitude) str
-(':47.55224, \\) p n
-(126) # (                 ') S
-(longitude) str
-(':7.62016 }) p n
-(127) # () N
-(128) # (    ) S
-(# use suunrise or sunset duration 30 minutess) c n
-(129) # () S
-(    ) p
-(#SL = set_light\(astral_info = astral_info\)) c n
-(130) # () S
-(    ) p
-(#SL = set_light\(astral_info = astral_info, duration = 60\)) c n
+(        self.RunLoop\(\)) p n
+(125) # () N
+(126) # () N
+(127) # (    ) S
+(def) K
+( CloseApp\(self\):) p n
+(128) # (        logger.info\(") S
+(closing down) str
+("\)) p n
+(129) # (        self.close\(\)) N
+(130) # (     ) N
 (131) # () N
-(132) # () S
-(    ) p
-(# use start time, duration is 15 minutes) c n
-(133) # () S
-(    SL = set_light\(start_time = set_my_time\)) p n
-(134) # (    ) S
-(# use start time, duration is 60 minutes) c n
-(135) # () N
+(132) # () N
+(133) # (    ) S
+(def) K
+( GetRootDir\(self\):) p n
+(134) # (        """) S
+(determines the root directory of the lc_main, depending on the OS) str
+(""") p n
+(135) # (        ) S
+(#determine the platform, Darwin for OS) c n
 (136) # () S
-(    ) p
-(#SL = set_light\(start_time = set_my_time, duration =60\)) c n
-(137) # () S
-(    SL.run_loop\(\)) p n
-(138) # () N
-(lc_control.py) (Page 3/3) (Apr 26, 2026 14:49) title
+( ) p n
+(137) # ( ) N
+(138) # (        ) S
+(if) K
+( platform.system\(\) == ') p
+(Darwin) str
+(':) p n
+(139) # (            ) S
+(return) K
+( ') p
+(/Users/) str
+('+os.getlogin\(\)+') p
+(/git/light_control/) str
+(') p n
+(140) # (        ) S
+(elif) K
+( platform.system\(\) == ') p
+(Linux) str
+(': ) p n
+(141) # (            ) S
+(return) K
+( ') p
+(/home/) str
+('+os.getlogin\(\)+') p
+(/git/light_control/) str
+(') p n
+(142) # (        ) S
+(else) K
+(:) p n
+(143) # (            logger.error\(") S
+(OS not supported) str
+("\)) p n
+(144) # (            sys.exit\(\)) N
+(145) # (            ) N
+(146) # () N
+(147) # (    ) S
+(def) K
+( SetupLogger\(self\):) p n
+(148) # () N
+(149) # () N
+(150) # (        logger.remove\(0\)) N
+(151) # (        ) S
+(#now we add color to the terminal output) c n
+(152) # () S
+(        logger.add\(sys.stdout,) p n
+(153) # (                colorize = True,format=") S
+(<green>{time}</green>    {function}   {line}    {level}     <level>{message}</level>) str
+(" ,) p n
+(154) # (                level = ") S
+(DEBUG) str
+("\)) p n
+(155) # () N
+(156) # () N
+(157) # () N
+(158) # (        fmt =  ") S
+({time} - {name}-   {function} -{line}- {level}    - {message}) str
+(") p n
+(159) # (        logger.add\(') S
+(info.log) str
+(', format = fmt , level = ') p
+(INFO) str
+(',rotation=") p
+(1 day) str
+("\)) p n
+(160) # () N
+(161) # () N
+(162) # (        ) S
+(# set the colors of the different levels) c n
+(163) # () S
+(        logger.level\(") p
+(INFO) str
+(",color =') p
+(<black>) str
+('\)) p n
+(164) # (        logger.level\(") S
+(WARNING) str
+(",color=') p
+(<green>) str
+('\)) p n
+(165) # (        logger.level\(") S
+(ERROR) str
+(",color=') p
+(<red>) str
+('\)) p n
+(166) # (        logger.level\(") S
+(DEBUG) str
+(",color = ') p
+(<blue>) str
+('\)) p n
+(lc_main.py) (Page 3/5) (Apr 27, 2026 13:50) title
 border
 grestore
 (Printed by Andi Klein) rhead
-(lc_control.py) (3/3) (Sunday April 26, 2026) footer
+(lc_main.py) (3/5) (Monday April 27, 2026) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (4) 4
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 3.780000 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(167) # ( ) p n
+(168) # (        ) S
+(return) K n
+(169) # () N
+(170) # () S
+(    ) p
+(def) K
+( SetupAstral\(self\):) p n
+(171) # (        myl = AT.LocationInfo\(\)) N
+(172) # (        myl.name        = self.myconf.astral_name) N
+(173) # (        myl.region      = self.myconf.astral_region) N
+(174) # (        myl.timezone    = self.myconf.astral_timezone) N
+(175) # (        myl.latitude    = self.myconf.astral_latitude) N
+(176) # (        myl.longitude   = self.myconf.astral_longitude) N
+(177) # (    ) N
+(178) # (        self.myl        = myl) N
+(179) # () N
+(180) # (        self.Get_Sun\(\)) N
+(181) # (        ) S
+(return) K
+( ) p n
+(182) # (    ) N
+(183) # (    ) S
+(def) K
+( Get_Sun\(self\):) p n
+(184) # (        s_tmp = sun\(self.myl.observer,date=dt.datetime.today\(\),tzinfo=self.myl.timezone\)) N
+(185) # (        self.my_sunrise     = s_tmp[') S
+(sunrise) str
+('].strftime\(') p
+(%H:%M:%S) str
+('\)) p n
+(186) # (        self.my_sunset      = s_tmp[') S
+(sunset) str
+('].strftime\(') p
+(%H:%M:%S) str
+('\)) p n
+(187) # (        ) S
+(return) K n
+(188) # () S
+(    ) p n
+(189) # () N
+(190) # (    ) S
+(def) K
+( RunLoop\(self\):) p n
+(191) # (        ) S
+(# first we turn all the sensors off) c n
+(192) # () S
+(        ) p
+(for) K
+( device ) p
+(in) K
+( self.myconf.active_sensors:) p n
+(193) # (            self.IKC.turn_off\(device\)) N
+(194) # (            self.device_on[device] = False) N
+(195) # () N
+(196) # () N
+(197) # (       ) S
+(# here we continually loop over time) c n
+(198) # () S
+(        ) p
+(# loop_time is how often in units of minutes) c n
+(199) # () S
+(        ) p
+(while) K
+( True:) p n
+(200) # (            ) S
+(# iterate over all the acive devices) c n
+(201) # () S
+(            ) p
+(#  ) c n
+(202) # () S
+(            ) p
+(for) K
+( device ) p
+(in) K
+( self.myconf.active_sensors:) p n
+(203) # (                    ) S
+(# check the time for each device) c n
+(204) # () S
+(                    self.check_device\(device\)) p n
+(205) # () N
+(206) # (            time.sleep\(self.myconf.loop_time*60\)) N
+(207) # (            ) S
+(#time.sleep\(1\)) c n
+(208) # () S
+(            ) p n
+(209) # () N
+(210) # (    ) S
+(def) K
+( check_device\(self,device\):) p n
+(211) # (        ) S
+(# this checks the time for a given device and performs the action if the time is within the window) c n
+(212) # () S
+(        ) p
+(# we get the start time, end time, window and action for the device from the config file) c n
+(213) # () S
+(        start_time = getattr\(self.myconf, f") p
+({device}_start) str
+("\)) p n
+(214) # (        end_time = getattr\(self.myconf, f") S
+({device}_end) str
+("\)) p n
+(215) # (        mywindow = getattr\(self.myconf, f") S
+({device}_window) str
+("\)) p n
+(216) # (        action = getattr\(self.myconf, f") S
+({device}_action) str
+("\)) p n
+(217) # () N
+(218) # (        ) S
+(print) K
+(\(device,start_time\)) p n
+(219) # () N
+(220) # () N
+(221) # (        ) S
+(# if the action is blank, we do not use this device) c n
+(222) # () S
+(        ) p
+(if) K
+( action == "":) p n
+(223) # (            ) S
+(return) K n
+(lc_main.py) (Page 4/5) (Apr 27, 2026 13:50) title
+border
+grestore
+(Printed by Andi Klein) rhead
+(lc_main.py) (4/5) (Monday April 27, 2026) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (5) 5
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 3.780000 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(224) # () p n
+(225) # (        ) S
+(# if the window is not 0, we use it to set a random start and end time) c n
+(226) # () S
+(        ) p
+(if) K
+( mywindow > 0:) p n
+(227) # (            random_time_new_start = RT.uniform\(-mywindow/2, mywindow/2\)) N
+(228) # (            random_time_new_end = RT.uniform\(-mywindow/2, mywindow/2\)) N
+(229) # (        ) S
+(elif) K
+( mywindow == -1:) p n
+(230) # (            random_time_new_start = RT.uniform\(-20/2, 20/2\)  ) S
+(# with sunset we also ransomize but a smaller window) c n
+(231) # () S
+(            random_time_new_end = RT.uniform\(-20/2, 20/2\)) p n
+(232) # (            start_time = self.my_sunset) N
+(233) # (        ) S
+(else) K
+(:) p n
+(234) # (            random_time_new_start = 0) N
+(235) # (            random_time_new_end = 0) N
+(236) # () N
+(237) # (        self.start_time = dt.datetime.strptime\(start_time, ") S
+(%H:%M:%S) str
+("\) ) p
+(#+ dt.timedelta\(minutes = random_time_new_start\)) c n
+(238) # () S
+(        self.end_time = dt.datetime.strptime\(end_time, ") p
+(%H:%M:%S) str
+("\)) p
+(#+ dt.timedelta\(minutes = random_time_new_end\)) c n
+(239) # () N
+(240) # () S
+( ) p n
+(241) # (        ) S
+(print) K
+(\(device\)) p n
+(242) # (        self.check_time\(device\)) N
+(243) # (        ) S
+(return) K n
+(244) # () N
+(245) # () S
+(    ) p
+(#def check_time\(self,device\):) c n
+(246) # () S
+(    ) p
+(def) K
+( check_time\(self,device\):) p n
+(247) # () N
+(248) # (        now = dt.datetime.now\(\)) N
+(249) # (        current_time = now.time\(\)) N
+(250) # () N
+(251) # () N
+(252) # () N
+(253) # (        ) S
+(print) K
+(\(f") p
+(current time: {current_time}, start time: {self.start_time.time\(\)}, end time: {self.end_time.time\(\)}) str
+("\)) p n
+(254) # () N
+(255) # (        ) S
+(if) K
+(\(current_time > self.start_time.time\(\) ) p
+(and) K
+( current_time <= self.end_time.time\(\)\):) p n
+(256) # (            ) S
+(if) K
+(\(self.device_on[device] == False\):) p n
+(257) # (                ) N
+(258) # (                self.IKC.turn_on\(device\)) N
+(259) # (                self.device_on[device] = True) N
+(260) # () N
+(261) # () N
+(262) # (        ) S
+(else) K
+(: ) p
+(# we only do something if lights are on) c n
+(263) # () S
+(            ) p
+(if) K
+(\(self.device_on[device] == True\):) p n
+(264) # (                self.IKC.turn_off\(device\)) N
+(265) # (                self.device_on[device] = False) N
+(266) # (        ) S
+(return) K n
+(267) # () N
+(268) # (if) S
+( __name__ == ") p
+(__main__) str
+(":) p n
+(269) # (    app = QApplication\([]\)) N
+(270) # (    config_file = ") S
+(/Users/klein/git/light_control/config/light_control.json) str
+(") p n
+(271) # (    window = lc_main\(config_file = config_file \)) N
+(272) # (    ) N
+(273) # (    window.show\(\)) N
+(274) # (    app.) S
+(exec) K
+(\(\)           ) p
+(lc_main.py) (Page 5/5) (Apr 27, 2026 13:50) title
+border
+grestore
+(Printed by Andi Klein) rhead
+(lc_main.py) (5/5) (Monday April 27, 2026) footer
 end % of iso1dict
 pagesave restore
 showpage

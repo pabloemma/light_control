@@ -1,36 +1,66 @@
-2026-04-25T15:52:54.798716+0200 - __main__-   __init__ -70- WARNING    - error in configuration, opening dialog
-2026-04-25T15:53:14.261906+0200 - __main__-   CloseApp -80- INFO    - closing down
-2026-04-26T14:30:44.915626+0200 - __main__-   CloseApp -102- INFO    - closing down
-2026-04-26T14:33:26.611565+0200 - __main__-   CloseApp -102- INFO    - closing down
-2026-04-26T14:33:44.194918+0200 - __main__-   CloseApp -102- INFO    - closing down
-2026-04-26T14:38:48.440468+0200 - __main__-   CloseApp -102- INFO    - closing down
-2026-04-26T14:41:00.808059+0200 - __main__-   CloseApp -102- INFO    - closing down
-2026-04-26T14:46:45.870570+0200 - __main__-   __init__ -88- WARNING    - error in configuration, opening dialog
-2026-04-26T14:47:00.732551+0200 - __main__-   CloseApp -101- INFO    - closing down
-2026-04-26T15:27:26.640092+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
-2026-04-26T15:29:57.358431+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
-2026-04-26T15:31:18.496479+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
-2026-04-26T15:31:59.202452+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
-2026-04-26T15:36:38.386805+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
-2026-04-26T15:37:24.216936+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
-2026-04-26T15:41:15.651776+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
-2026-04-26T15:42:31.262611+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
-2026-04-26T15:42:37.913302+0200 - __main__-   __init__ -99- ERROR    - Error loading configuration file: string indices must be integers
-2026-04-26T15:43:29.202397+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
-2026-04-26T15:44:46.366848+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
-2026-04-26T15:46:50.824089+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
-2026-04-26T15:47:47.651410+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
-2026-04-26T15:50:10.465626+0200 - __main__-   __init__ -92- WARNING    - error in configuration, opening dialog
-2026-04-26T15:50:20.764724+0200 - __main__-   CloseApp -110- INFO    - closing down
-2026-04-26T16:14:58.025371+0200 - __main__-   __init__ -94- WARNING    - error in configuration, opening dialog
-2026-04-26T16:16:16.211085+0200 - __main__-   __init__ -96- WARNING    - error in configuration, opening dialog
-2026-04-26T16:16:23.954660+0200 - __main__-   CloseApp -114- INFO    - closing down
-2026-04-26T16:20:36.993226+0200 - __main__-   __init__ -96- WARNING    - error in configuration, opening dialog
-2026-04-26T16:25:16.836959+0200 - __main__-   __init__ -96- WARNING    - error in configuration, opening dialog
-2026-04-26T16:25:27.449952+0200 - __main__-   CloseApp -120- INFO    - closing down
-2026-04-26T16:26:23.148128+0200 - __main__-   __init__ -96- WARNING    - error in configuration, opening dialog
-2026-04-26T16:26:31.929942+0200 - __main__-   CloseApp -121- INFO    - closing down
-2026-04-26T16:27:02.386741+0200 - __main__-   __init__ -96- WARNING    - error in configuration, opening dialog
-2026-04-26T16:27:10.754945+0200 - __main__-   CloseApp -122- INFO    - closing down
-2026-04-26T16:28:04.574986+0200 - __main__-   CloseApp -122- INFO    - closing down
-2026-04-26T16:39:56.260998+0200 - __main__-   CloseApp -122- INFO    - closing down
+2026-05-02T11:38:27.497638+0200 - __main__-   __init__ -36- ERROR    - Error loading configuration file: module 'config_lc' has no attribute 'lc_config'
+2026-05-02T14:54:09.626367+0200 - __main__-   on_connect -106- INFO    - Connected with result code 5
+2026-05-02T14:54:11.648960+0200 - __main__-   on_connect -106- INFO    - Connected with result code 5
+2026-05-02T14:54:15.667330+0200 - __main__-   on_connect -106- INFO    - Connected with result code 5
+2026-05-02T14:55:02.557370+0200 - __main__-   on_connect -106- INFO    - Connected with result code 5
+2026-05-02T14:55:04.576346+0200 - __main__-   on_connect -106- INFO    - Connected with result code 5
+2026-05-02T14:55:08.595328+0200 - __main__-   on_connect -106- INFO    - Connected with result code 5
+2026-05-02T14:57:00.476452+0200 - __main__-   on_connect -106- INFO    - Connected with result code 5
+2026-05-02T14:57:02.494436+0200 - __main__-   on_connect -106- INFO    - Connected with result code 5
+2026-05-02T14:57:06.514559+0200 - __main__-   on_connect -106- INFO    - Connected with result code 5
+2026-05-02T14:58:34.503757+0200 - __main__-   on_connect -106- INFO    - Connected with result code 5
+2026-05-02T14:58:36.522453+0200 - __main__-   on_connect -106- INFO    - Connected with result code 5
+2026-05-02T14:58:40.538974+0200 - __main__-   on_connect -106- INFO    - Connected with result code 5
+2026-05-02T15:10:21.768576+0200 - __main__-   on_connect -106- INFO    - Connected with result code 5
+2026-05-02T15:10:23.786415+0200 - __main__-   on_connect -106- INFO    - Connected with result code 5
+2026-05-02T15:10:27.799027+0200 - __main__-   on_connect -106- INFO    - Connected with result code 5
+2026-05-02T15:12:27.172330+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:12:29.188076+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:12:33.201819+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:12:42.551482+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:12:44.573207+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:12:48.589246+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:17:18.970315+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:17:20.990939+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:17:25.009439+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:18:09.166043+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:18:11.177990+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:18:15.190593+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:18:32.247534+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:18:34.262283+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:18:38.275415+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:25:12.998006+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:25:15.014918+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:25:19.033758+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:25:40.985517+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:25:43.007690+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:25:47.023510+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:26:00.202010+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:26:02.222212+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:26:06.232158+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:26:21.105521+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:26:23.122917+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:26:27.138776+0200 - __main__-   on_connect -107- INFO    - Connected with result code 5
+2026-05-02T15:28:09.995623+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:28:12.012838+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:28:16.031424+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:28:29.831565+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:28:31.844017+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:28:35.861026+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:29:30.385805+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:29:32.404008+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:29:36.424114+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:30:07.978543+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:30:09.992271+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:30:14.010600+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:50:59.028578+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:51:01.045112+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:51:05.065538+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:51:17.355661+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:51:19.373727+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:51:23.390548+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:51:39.390793+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:51:41.406687+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T15:51:45.428041+0200 - __main__-   on_connect -108- INFO    - Connected with result code 5
+2026-05-02T16:15:54.829283+0200 - __main__-   on_connect -112- INFO    - Connected with result code Success
+2026-05-02T16:15:54.832584+0200 - __main__-   on_message -116- INFO    - Received message on topic zigbee2mqtt/ikea_5/set with payload b'OFF'
