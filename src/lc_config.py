@@ -45,6 +45,8 @@ class lc_config(object):
             self.name  = myconfig['system']['name']
             self.version  = myconfig['system']['version']
             self.description  = myconfig['system']['description']
+            print(f"\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n\n{self.name} - Version {self.version}\n{self.description}\n\n")
+            print(f"\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n")
 
             self.host = myconfig['settings']['host']
             self.PWfile = myconfig['settings']['PWfile']
