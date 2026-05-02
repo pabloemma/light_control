@@ -186,8 +186,8 @@ class lc_main(object):
                     # check the time for each device
                     self.check_time(device)
 
-            #time.sleep(self.myconf.loop_time*60)
-            time.sleep(1)
+            time.sleep(self.myconf.loop_time*60)
+            #time.sleep(1)
         return
 
     def SetupDevices(self):  
