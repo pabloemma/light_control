@@ -20,17 +20,23 @@ class MyMQTTClient(mqtt.Client):
         MQC.on_message = self.on_message
         MQC.on_publish = self.on_publish
 
+        unacked_publish=set()
+        MQC.user_data_set(unacked_publish)
         MQC.connect("192.168.3.201", 1883, 60)
 
 
-        msq_info = MQC.publish('zigbee2mqtt/ikea_2/set', 'OFF', qos=1)
+        msq_info = MQC.publish('zigbee2mqtt/ikea_5/set', 'ON', qos=1)
         print(msq_info)
-    
+        unacked_publish.add(msq_info.mid)
+
+        #msq_info = MQC.subscribe('zigbee2mqtt/ikea_5/set')
+        #print(msq_info)    
 
     def on_connect(self, client, userdata, flags, rc):
         print("Connected with result code "+str(rc))
 
     def on_message(self, client, userdata, msg):
+        print("on_message")
         print(msg.topic+" "+str(msg.payload))
 
     def on_publish(client, userdata, mid, reason_code, properties):
@@ -50,7 +56,15 @@ class MyMQTTClient(mqtt.Client):
             print("We could also try using a list of acknowledged mid rather than removing from pending list,")
             print("but remember that mid could be re-used !")
 
+    def on_subscribe(client, userdata, mid, reason_code_list, properties):
+        # Since we subscribed only for a single channel, reason_code_list contains
+        # a single entry
+        if reason_code_list[0].is_failure:
+            print(f"Broker rejected you subscription: {reason_code_list[0]}")
+        else:
+            print(f"Broker granted the following QoS: {reason_code_list[0].value}")
+
 
 if __name__ == "__main__":
     client = MyMQTTClient()
-    client.loop_forever()   
+    #client.loop_forever()   

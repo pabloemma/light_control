@@ -158,7 +158,7 @@ class lc_main(object):
         self.my_sunset      = s_tmp['sunset'].strftime('%H:%M:%S')
         print(f"\n\n*************************************************************\n\n")
         print(f"sunrise is at {self.my_sunrise} and sunset is at {self.my_sunset}")
-        print(f"\n\n*************************************************************\n\n")
+        print(f"\n\n*************************************************************\n\n") 
         
         return
     
