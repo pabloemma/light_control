@@ -82,7 +82,7 @@ class IkeaPahoClient:
         MQC.on_connect = self.on_connect
         MQC.on_message = self.on_message
         #MQC.on_publish = self.on_publish
-        #MQC.on_subscribe = self.on_subscribe   
+        MQC.on_subscribe = self.on_subscribe   
         # 
         self.MQC.connected_flag = False 
 
@@ -122,7 +122,9 @@ class IkeaPahoClient:
         return
 
     def on_message( self,client, userdata, msg):
-        logger.info(f"Received message on topic {msg.topic} with payload {msg.payload}")    
+        logger.info(f"Received message on topic {msg.topic} with payload {msg.payload}") 
+        a=str(msg.payload.decode("utf-8"))
+        print(f"Decoded message: {a}")
         return  
     
     def on_publish(self,client, userdata, mid, reason_code, properties):
@@ -180,11 +182,13 @@ if __name__ == "__main__":
     client = IkeaPahoClient(config_file=config_file)
     client.start() #start the loop
     # first we subscribe to the topic we want to listen to, in this case we want to listen to the topic that the ikea outlet is publishing to, which is zigbee2mqtt/ikea_5/set
-    client.mysubscribe("zigbee2mqtt/ikea_4/set")
+    #client.mysubscribe("zigbee2mqtt/ikea_4/set")
+    client.mysubscribe("zigbee2mqtt/ikea_4")
     # now publish something to the broker
     client.mypublish("zigbee2mqtt/ikea_4/set", "ON")   
+    client.mypublish("zigbee2mqtt/ikea_4", payload=None)   # this retunrs the state of the ikea_4
     time.sleep(20)
-    client.mypublish("zigbee2mqtt/ikea_4/set", "OFF")   
+    #client.mypublish("zigbee2mqtt/ikea_4/set", "OFF")   
  
     client.stop()
                    
