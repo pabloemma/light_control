@@ -9,8 +9,8 @@ class MQTTClientWrapper:
         
 
         uname = 'addons'
-        pw = input("Please enter the password: ")
-
+        #pw = input("Please enter the password: ")
+        pw='phooGhu0au4zaem3ooB5yapheM1oXaifishiubooH0quio2Ziig2OorohC1oShen'
         # Initialize Paho Client
         self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id=client_id)
         self.client.username_pw_set(uname, pw)
@@ -35,6 +35,7 @@ class MQTTClientWrapper:
         self.client.connect(self.broker, self.port, 60)
         # Use loop_start() for non-blocking background loop
         self.client.loop_start() 
+        time.sleep(5)  # Allow time for connection and subscription
 
     def stop(self):
         self.client.loop_stop()
@@ -53,8 +54,12 @@ if __name__ == "__main__":
     
     client.start()
     client.subscribe("zigbee2mqtt/ikea_5/set")
+    time.sleep(5)  # Keep running to receive messages
 
     client.publish("zigbee2mqtt/ikea_5/set", "OFF")
-    
+
+   
     time.sleep(5)  # Keep running to receive messages
+
+
     client.stop()

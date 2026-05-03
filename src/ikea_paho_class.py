@@ -8,6 +8,7 @@ import sys
 import platform
 import json
 import time
+import random as RND
 
 
 #My imports, I am using the config mechanism from lc_main_nogui
@@ -60,10 +61,12 @@ class IkeaPahoClient:
         host = self.myconf.host
         port = 1883  
 
+        #Create unit id with random number to avoid conflicts with other clients
 
+        client_id = "ikea_paho_client"+str(RND.randint(0,1000))
  
         #initialize the MQTT client and set the on_connect and on_message callbacks
-        self.MQC=MQC = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+        self.MQC=MQC = mqtt.Client(client_id=client_id, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
 
         # now we connect to the broker
 
@@ -79,7 +82,9 @@ class IkeaPahoClient:
         MQC.on_connect = self.on_connect
         MQC.on_message = self.on_message
         #MQC.on_publish = self.on_publish
-        #MQC.on_subscribe = self.on_subscribe    
+        #MQC.on_subscribe = self.on_subscribe   
+        # 
+        self.MQC.connected_flag = False 
 
 
 
@@ -109,7 +114,11 @@ class IkeaPahoClient:
         return
 
     def on_connect( self,client, userdata, flags, rc,properties):
-        logger.info(f"Connected with result code {rc}") 
+        if rc == 0:
+            self.MQC.connected_flag = True
+            logger.info(f"Connected with result code {rc}") 
+        else:
+            logger.error(f"Failed to connect, return code {rc}")
         return
 
     def on_message( self,client, userdata, msg):
@@ -126,6 +135,10 @@ class IkeaPahoClient:
         
     def mypublish(self, topic, payload, qos=0, retain=False):
         msg_info = self.MQC.publish(topic, payload, qos, retain)
+        print(f"Published message to topic {topic} with payload {payload}, mid: {msg_info.mid}, result: {msg_info.rc}")
+        #let's make sure it gets published before we return
+        msg_info.wait_for_publish()
+        print(msg_info.is_published()) 
         return msg_info
     
     def mysubscribe(self, topic, qos=0):
@@ -136,9 +149,15 @@ class IkeaPahoClient:
         # Since we subscribed only for a single channel, reason_code_list contains only one item.
         logger.info(f"Subscribed with mid {mid}, reason code {reason_code_list[0]}")
         return
+
     def start(self):
-        self.MQC.connect(self.myconf.host, 1883, 60)
         self.MQC.loop_start()
+
+        self.MQC.connect(self.myconf.host, 1883, 60)
+        while not self.MQC.connected_flag:
+            logger.info("Waiting for connection...")
+            time.sleep(1)
+        return
 
     def stop(self):
         self.MQC.loop_stop()
@@ -161,10 +180,12 @@ if __name__ == "__main__":
     client = IkeaPahoClient(config_file=config_file)
     client.start() #start the loop
     # first we subscribe to the topic we want to listen to, in this case we want to listen to the topic that the ikea outlet is publishing to, which is zigbee2mqtt/ikea_5/set
-    client.mysubscribe("zigbee2mqtt/ikea_5/set")
+    client.mysubscribe("zigbee2mqtt/ikea_4/set")
     # now publish something to the broker
-    client.mypublish("zigbee2mqtt/ikea_5/set", "OFF")   
-    time.sleep(10)
+    client.mypublish("zigbee2mqtt/ikea_4/set", "ON")   
+    time.sleep(20)
+    client.mypublish("zigbee2mqtt/ikea_4/set", "OFF")   
+ 
     client.stop()
                    
 
