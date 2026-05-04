@@ -412,3 +412,78 @@
 2026-05-04T10:00:13.536231+0200 - __main__-   on_subscribe -152- INFO    - Subscribed with mid 1, reason code Granted QoS 0
 2026-05-04T10:00:13.629552+0200 - __main__-   on_message -125- INFO    - Received message on topic zigbee2mqtt/ikea_4 with payload b''
 2026-05-04T10:00:13.644778+0200 - __main__-   on_message -125- INFO    - Received message on topic zigbee2mqtt/ikea_4 with payload b'{"child_lock":null,"identify":null,"led_enable":null,"linkquality":163,"power_on_behavior":"previous","state":"ON","update":{"installed_version":33816580,"latest_release_notes":"https://ww8.ikea.com/ikeahomesmart/releasenotes/releasenotes.html","latest_source":"https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/images/IKEA/tretakt_smart_plug_soc-0x1100-2.4.25-prod.ota.ota.signed","latest_version":33816613,"state":"available"}}'
+2026-05-04T10:02:04.493333+0200 - __main__-   start -160- INFO    - Waiting for connection...
+2026-05-04T10:02:05.496874+0200 - __main__-   on_connect -119- INFO    - Connected with result code Success
+2026-05-04T10:02:05.499701+0200 - __main__-   mypublish -140- INFO    - Published message to topic zigbee2mqtt/ikea_4/set with payload ON, mid: 2, result: 0
+2026-05-04T10:02:05.500017+0200 - __main__-   mypublish -143- INFO    - Message published: True
+2026-05-04T10:02:05.500269+0200 - __main__-   mypublish -140- INFO    - Published message to topic zigbee2mqtt/ikea_4 with payload None, mid: 3, result: 0
+2026-05-04T10:02:05.500567+0200 - __main__-   mypublish -143- INFO    - Message published: True
+2026-05-04T10:02:05.510534+0200 - __main__-   on_subscribe -152- INFO    - Subscribed with mid 1, reason code Granted QoS 0
+2026-05-04T10:02:05.531559+0200 - __main__-   on_message -125- INFO    - Received message on topic zigbee2mqtt/ikea_4 with payload b''
+2026-05-04T10:02:05.531763+0200 - __main__-   on_message -127- INFO    - Decoded message: 
+2026-05-04T10:02:05.630880+0200 - __main__-   on_message -125- INFO    - Received message on topic zigbee2mqtt/ikea_4 with payload b'{"child_lock":null,"identify":null,"led_enable":null,"linkquality":163,"power_on_behavior":"previous","state":"ON","update":{"installed_version":33816580,"latest_release_notes":"https://ww8.ikea.com/ikeahomesmart/releasenotes/releasenotes.html","latest_source":"https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/images/IKEA/tretakt_smart_plug_soc-0x1100-2.4.25-prod.ota.ota.signed","latest_version":33816613,"state":"available"}}'
+2026-05-04T10:02:05.631188+0200 - __main__-   on_message -127- INFO    - Decoded message: {"child_lock":null,"identify":null,"led_enable":null,"linkquality":163,"power_on_behavior":"previous","state":"ON","update":{"installed_version":33816580,"latest_release_notes":"https://ww8.ikea.com/ikeahomesmart/releasenotes/releasenotes.html","latest_source":"https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/images/IKEA/tretakt_smart_plug_soc-0x1100-2.4.25-prod.ota.ota.signed","latest_version":33816613,"state":"available"}}
+2026-05-04T10:03:15.829709+0200 - __main__-   start -160- INFO    - Waiting for connection...
+2026-05-04T10:03:16.835968+0200 - __main__-   start -160- INFO    - Waiting for connection...
+2026-05-04T10:03:16.875508+0200 - __main__-   on_connect -119- INFO    - Connected with result code Success
+2026-05-04T10:03:17.843891+0200 - __main__-   mypublish -140- INFO    - Published message to topic zigbee2mqtt/ikea_4/set with payload ON, mid: 2, result: 0
+2026-05-04T10:03:17.845135+0200 - __main__-   mypublish -143- INFO    - Message published: True
+2026-05-04T10:03:17.845727+0200 - __main__-   mypublish -140- INFO    - Published message to topic zigbee2mqtt/ikea_4 with payload None, mid: 3, result: 0
+2026-05-04T10:03:17.846361+0200 - __main__-   mypublish -143- INFO    - Message published: True
+2026-05-04T10:03:24.072134+0200 - __main__-   on_subscribe -152- INFO    - Subscribed with mid 1, reason code Granted QoS 0
+2026-05-04T10:03:26.994042+0200 - __main__-   on_message -125- INFO    - Received message on topic zigbee2mqtt/ikea_4 with payload b''
+2026-05-04T10:03:35.690639+0200 - __main__-   on_message -127- INFO    - Decoded message: 
+2026-05-04T10:03:55.279433+0200 - __main__-   start -160- INFO    - Waiting for connection...
+2026-05-04T10:03:56.262678+0200 - __main__-   on_connect -119- INFO    - Connected with result code Success
+2026-05-04T10:03:56.282119+0200 - __main__-   mypublish -140- INFO    - Published message to topic zigbee2mqtt/ikea_4/set with payload ON, mid: 2, result: 0
+2026-05-04T10:03:56.282931+0200 - __main__-   mypublish -143- INFO    - Message published: True
+2026-05-04T10:03:56.283197+0200 - __main__-   mypublish -140- INFO    - Published message to topic zigbee2mqtt/ikea_4 with payload None, mid: 3, result: 0
+2026-05-04T10:03:56.283368+0200 - __main__-   mypublish -143- INFO    - Message published: True
+2026-05-04T10:03:56.300225+0200 - __main__-   on_subscribe -152- INFO    - Subscribed with mid 1, reason code Granted QoS 0
+2026-05-04T10:03:56.312506+0200 - __main__-   on_message -125- INFO    - Received message on topic zigbee2mqtt/ikea_4 with payload b''
+2026-05-04T10:03:56.312904+0200 - __main__-   on_message -127- INFO    - Decoded message: 
+2026-05-04T10:03:56.409768+0200 - __main__-   on_message -125- INFO    - Received message on topic zigbee2mqtt/ikea_4 with payload b'{"child_lock":null,"identify":null,"led_enable":null,"linkquality":167,"power_on_behavior":"previous","state":"ON","update":{"installed_version":33816580,"latest_release_notes":"https://ww8.ikea.com/ikeahomesmart/releasenotes/releasenotes.html","latest_source":"https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/images/IKEA/tretakt_smart_plug_soc-0x1100-2.4.25-prod.ota.ota.signed","latest_version":33816613,"state":"available"}}'
+2026-05-04T10:03:56.410282+0200 - __main__-   on_message -127- INFO    - Decoded message: {"child_lock":null,"identify":null,"led_enable":null,"linkquality":167,"power_on_behavior":"previous","state":"ON","update":{"installed_version":33816580,"latest_release_notes":"https://ww8.ikea.com/ikeahomesmart/releasenotes/releasenotes.html","latest_source":"https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/images/IKEA/tretakt_smart_plug_soc-0x1100-2.4.25-prod.ota.ota.signed","latest_version":33816613,"state":"available"}}
+2026-05-04T10:04:12.846707+0200 - __main__-   start -160- INFO    - Waiting for connection...
+2026-05-04T10:04:13.852867+0200 - __main__-   start -160- INFO    - Waiting for connection...
+2026-05-04T10:04:13.865590+0200 - __main__-   on_connect -119- INFO    - Connected with result code Success
+2026-05-04T10:04:14.858857+0200 - __main__-   mypublish -140- INFO    - Published message to topic zigbee2mqtt/ikea_4/set with payload ON, mid: 2, result: 0
+2026-05-04T10:04:14.860236+0200 - __main__-   mypublish -143- INFO    - Message published: True
+2026-05-04T10:04:14.861030+0200 - __main__-   mypublish -140- INFO    - Published message to topic zigbee2mqtt/ikea_4 with payload None, mid: 3, result: 0
+2026-05-04T10:04:14.861676+0200 - __main__-   mypublish -143- INFO    - Message published: True
+2026-05-04T10:04:14.883522+0200 - __main__-   on_subscribe -152- INFO    - Subscribed with mid 1, reason code Granted QoS 0
+2026-05-04T10:04:19.239015+0200 - __main__-   on_message -125- INFO    - Received message on topic zigbee2mqtt/ikea_4 with payload b''
+2026-05-04T10:04:25.239199+0200 - __main__-   on_message -127- INFO    - Decoded message: 
+2026-05-04T10:04:38.753465+0200 - __main__-   on_message -125- INFO    - Received message on topic zigbee2mqtt/ikea_4 with payload b'{"child_lock":null,"identify":null,"led_enable":null,"linkquality":163,"power_on_behavior":"previous","state":"ON","update":{"installed_version":33816580,"latest_release_notes":"https://ww8.ikea.com/ikeahomesmart/releasenotes/releasenotes.html","latest_source":"https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/images/IKEA/tretakt_smart_plug_soc-0x1100-2.4.25-prod.ota.ota.signed","latest_version":33816613,"state":"available"}}'
+2026-05-04T10:09:19.485395+0200 - __main__-   start -161- INFO    - Waiting for connection...
+2026-05-04T10:09:20.068942+0200 - __main__-   on_connect -119- INFO    - Connected with result code Success
+2026-05-04T10:09:20.494340+0200 - __main__-   mypublish -141- INFO    - Published message to topic zigbee2mqtt/ikea_4/set with payload ON, mid: 2, result: 0
+2026-05-04T10:09:20.495251+0200 - __main__-   mypublish -144- INFO    - Message published: True
+2026-05-04T10:09:20.495740+0200 - __main__-   mypublish -141- INFO    - Published message to topic zigbee2mqtt/ikea_4 with payload None, mid: 3, result: 0
+2026-05-04T10:09:20.496140+0200 - __main__-   mypublish -144- INFO    - Message published: True
+2026-05-04T10:09:20.512144+0200 - __main__-   on_subscribe -153- INFO    - Subscribed with mid 1, reason code Granted QoS 0
+2026-05-04T10:09:20.530524+0200 - __main__-   on_message -125- INFO    - Received message on topic zigbee2mqtt/ikea_4 with payload b''
+2026-05-04T10:09:20.530864+0200 - __main__-   on_message -128- INFO    - Decoded message: 
+2026-05-04T10:09:20.633279+0200 - __main__-   on_message -125- INFO    - Received message on topic zigbee2mqtt/ikea_4 with payload b'{"child_lock":null,"identify":null,"led_enable":null,"linkquality":167,"power_on_behavior":"previous","state":"ON","update":{"installed_version":33816580,"latest_release_notes":"https://ww8.ikea.com/ikeahomesmart/releasenotes/releasenotes.html","latest_source":"https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/images/IKEA/tretakt_smart_plug_soc-0x1100-2.4.25-prod.ota.ota.signed","latest_version":33816613,"state":"available"}}'
+2026-05-04T10:09:20.634669+0200 - __main__-   on_message -128- INFO    - Decoded message: {"child_lock":0,"identify":0,"led_enable":0,"linkquality":167,"power_on_behavior":"previous","state":"ON","update":{"installed_version":33816580,"latest_release_notes":"https://ww8.ikea.com/ikeahomesmart/releasenotes/releasenotes.html","latest_source":"https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/images/IKEA/tretakt_smart_plug_soc-0x1100-2.4.25-prod.ota.ota.signed","latest_version":33816613,"state":"available"}}
+2026-05-04T10:12:30.568316+0200 - __main__-   on_connect -119- INFO    - Connected with result code Success
+2026-05-04T10:12:30.961528+0200 - __main__-   mypublish -142- INFO    - Published message to topic zigbee2mqtt/ikea_4/set with payload ON, mid: 2, result: 0
+2026-05-04T10:12:30.963548+0200 - __main__-   mypublish -145- INFO    - Message published: True
+2026-05-04T10:12:30.964505+0200 - __main__-   mypublish -142- INFO    - Published message to topic zigbee2mqtt/ikea_4 with payload None, mid: 3, result: 0
+2026-05-04T10:12:30.965049+0200 - __main__-   mypublish -145- INFO    - Message published: True
+2026-05-04T10:12:30.970755+0200 - __main__-   on_connect -119- INFO    - Connected with result code Success
+2026-05-04T10:12:30.977226+0200 - __main__-   on_subscribe -154- INFO    - Subscribed with mid 1, reason code Granted QoS 0
+2026-05-04T10:12:30.977911+0200 - __main__-   on_message -125- INFO    - Received message on topic zigbee2mqtt/ikea_4 with payload b''
+2026-05-04T10:12:30.978173+0200 - __main__-   on_message -128- INFO    - Decoded message: 
+2026-05-04T10:13:12.945209+0200 - __main__-   start -162- INFO    - Waiting for connection...
+2026-05-04T10:13:13.950887+0200 - __main__-   start -162- INFO    - Waiting for connection...
+2026-05-04T10:13:13.960525+0200 - __main__-   on_connect -119- INFO    - Connected with result code Success
+2026-05-04T10:13:14.957257+0200 - __main__-   mypublish -142- INFO    - Published message to topic zigbee2mqtt/ikea_4/set with payload ON, mid: 2, result: 0
+2026-05-04T10:13:14.958375+0200 - __main__-   mypublish -145- INFO    - Message published: True
+2026-05-04T10:13:14.958673+0200 - __main__-   mypublish -142- INFO    - Published message to topic zigbee2mqtt/ikea_4 with payload None, mid: 3, result: 0
+2026-05-04T10:13:14.959095+0200 - __main__-   mypublish -145- INFO    - Message published: True
+2026-05-04T10:13:14.978484+0200 - __main__-   on_subscribe -154- INFO    - Subscribed with mid 1, reason code Granted QoS 0
+2026-05-04T10:13:15.002616+0200 - __main__-   on_message -125- INFO    - Received message on topic zigbee2mqtt/ikea_4 with payload b''
+2026-05-04T10:13:15.003234+0200 - __main__-   on_message -128- INFO    - Decoded message: 
+2026-05-04T10:13:15.096087+0200 - __main__-   on_message -125- INFO    - Received message on topic zigbee2mqtt/ikea_4 with payload b'{"child_lock":null,"identify":null,"led_enable":null,"linkquality":163,"power_on_behavior":"previous","state":"ON","update":{"installed_version":33816580,"latest_release_notes":"https://ww8.ikea.com/ikeahomesmart/releasenotes/releasenotes.html","latest_source":"https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/images/IKEA/tretakt_smart_plug_soc-0x1100-2.4.25-prod.ota.ota.signed","latest_version":33816613,"state":"available"}}'
+2026-05-04T10:13:15.097479+0200 - __main__-   on_message -128- INFO    - Decoded message: {"child_lock":0,"identify":0,"led_enable":0,"linkquality":163,"power_on_behavior":"previous","state":"ON","update":{"installed_version":33816580,"latest_release_notes":"https://ww8.ikea.com/ikeahomesmart/releasenotes/releasenotes.html","latest_source":"https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/images/IKEA/tretakt_smart_plug_soc-0x1100-2.4.25-prod.ota.ota.signed","latest_version":33816613,"state":"available"}}

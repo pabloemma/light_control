@@ -124,7 +124,9 @@ class IkeaPahoClient:
     def on_message( self,client, userdata, msg):
         logger.info(f"Received message on topic {msg.topic} with payload {msg.payload}") 
         a=str(msg.payload.decode("utf-8"))
-        print(f"Decoded message: {a}")
+        a=a.replace("null","0")
+        logger.info(f"Decoded message: {a}")
+        #logger.info(f"the state is {a['state']}")
         return  
     
     def on_publish(self,client, userdata, mid, reason_code, properties):
@@ -137,10 +139,10 @@ class IkeaPahoClient:
         
     def mypublish(self, topic, payload, qos=0, retain=False):
         msg_info = self.MQC.publish(topic, payload, qos, retain)
-        print(f"Published message to topic {topic} with payload {payload}, mid: {msg_info.mid}, result: {msg_info.rc}")
+        logger.info(f"Published message to topic {topic} with payload {payload}, mid: {msg_info.mid}, result: {msg_info.rc}")
         #let's make sure it gets published before we return
         msg_info.wait_for_publish()
-        print(msg_info.is_published()) 
+        logger.info(f"Message published: {msg_info.is_published()}")
         return msg_info
     
     def mysubscribe(self, topic, qos=0):
