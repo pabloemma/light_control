@@ -60,7 +60,7 @@
                 "start_time" : "08:00:00",
                 "end_time" : "08:30:00",
                 "action" : "ON",
-                "window"  : 20
+                "window"  : 0
                 }
             },
         "sensor_6" : {
