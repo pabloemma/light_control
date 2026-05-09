@@ -58,7 +58,7 @@
         "sensor_5" : {
             "ikea_5":{
                 "start_time" : "08:00:00",
-                "end_time" : "21:00:00",
+                "end_time" : "08:30:00",
                 "action" : "ON",
                 "window"  : 20
                 }
