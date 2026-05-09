@@ -52,6 +52,7 @@ class lc_config(object):
             self.PWfile = myconfig['settings']['PWfile']
             self.username = myconfig['settings']['username']
             self.loop_time = myconfig['settings']['loop_time']*60 # convert minutes to seconds
+            self.DEBUG = myconfig['settings']['DEBUG']
 
             self.astral_info = myconfig['astral_info']
             self.astral_name = myconfig['astral_info']['name']

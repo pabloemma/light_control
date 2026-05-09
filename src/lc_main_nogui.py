@@ -185,9 +185,10 @@ class lc_main(object):
             for device in self.myconf.active_sensors:
                     # check the time for each device
                     self.check_time(device)
-
-            time.sleep(self.myconf.loop_time*60)
-            #time.sleep(10)
+            if not self.myconf.DEBUG:
+                time.sleep(self.myconf.loop_time*60)
+            else:
+                time.sleep(10)
         return
 
     def SetupDevices(self):  
@@ -267,10 +268,13 @@ class lc_main(object):
         now = dt.datetime.now()
         current_time = now.time()
 
+        if self.myconf.DEBUG:
+            print(f"checking device {device} at time {current_time}, start time is {self.device_properties[device]['start_time'].time()} and end time is {self.device_properties[device]['end_time'].time()} and action is {self.device_properties[device]['action']} and window is {self.device_properties[device]['window']} and device on is {self.device_on[device]}")
 
         if(self.device_properties[device]["start_time"].time() > self.device_properties[device]["end_time"].time()):
             # we are going over midnight, so need to correct this
             # we run anyway until we go thorugh midnight and then we move over to end_time
+            
             if current_time > self.device_properties[device]["start_time"].time() or current_time <= self.device_properties[device]["end_time"].time():
                 if(self.device_on[device] == False):
                     self.IKC.turn_on(device)

@@ -8,6 +8,7 @@
         "host" : "192.168.3.201",
         "PWfile" : "light.txt",
         "username" : "addons",
+        "DEBUG" : true,
         "loop_time" : 1
     },
     "astral_info" : {
